@@ -1,10 +1,7 @@
 package com.backend.api.entity.course;
 
 import com.backend.api.entity.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
@@ -18,6 +15,7 @@ public class CourseReview {
 
     private String content;
 
+    @Column(nullable = false)
     private int rating;
 
     @ManyToOne(fetch = LAZY, cascade = ALL)

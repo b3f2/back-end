@@ -1,10 +1,7 @@
 package com.backend.api.entity.course;
 
 import com.backend.api.entity.local.Local;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
@@ -16,6 +13,7 @@ public class CourseLocal {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private int turn;
 
     @ManyToOne(fetch = LAZY, cascade = ALL)

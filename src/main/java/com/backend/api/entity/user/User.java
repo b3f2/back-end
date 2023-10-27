@@ -15,15 +15,19 @@ public class User extends BaseEntity {
 
     private String name;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
     @Embedded
     private Address address;
 
+    @Column(nullable = false)
     private String birth;
 
+    @Column(nullable = false)
     private Gender gender;
 
 }
