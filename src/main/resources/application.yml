@@ -1,60 +1,11 @@
 spring:
   profiles:
-    default: local
-
-  datasource:
-    url: jdbc:h2:mem:~/backend
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  jpa:
-    hibernate:
-      ddl-auto: none
-
-jwt:
-  header: Authorization
-  refresh-header: Authorization-refresh
-  access-secret: c2lsdmvybmluzs10zwnolxnwcmluzy1ib290lwp3dc10dxrvcmlhbc1zzwnyzxqt
-  access-token-validity-in-seconds: 86400000
-  refresh-token-validity-in-seconds: 604800000
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-    defer-datasource-initialization: true # (2.5~) Hibernate ??? ?? data.sal ??
-
-  h2:
-    console:
-      enabled: true
-
----
-spring:
-  config:
-    activate:
-      on-profile: test
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-  sql:
-    init:
-      mode: never
-
+    active:
+      dev
+    group:
+      local-env:
+        - local
+      dev-env:
+        - dev
+      prod-env:
+        - prod
