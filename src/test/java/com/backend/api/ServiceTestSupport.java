@@ -1,8 +1,10 @@
 package com.backend.api;
 
 import com.backend.api.jwt.TokenProvider;
+import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
+import com.backend.api.service.course.CourseService;
 import com.backend.api.service.user.UserService;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +30,9 @@ public abstract class ServiceTestSupport {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
+    @Autowired
+    protected CourseService courseService;
+
+    @Autowired
+    protected CourseRepository courseRepository;
 }
