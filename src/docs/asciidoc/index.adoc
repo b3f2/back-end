@@ -1,0 +1,136 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:toc-title: 목차
+:sectlinks:
+= 어디갈까? REST API 문서
+
+== 회원 API
+
+=== 회원 가입 요청
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== 로그인 요청
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== 내 정보 수정
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== ㅤ
+
+== 코스 API
+
+// === 인기 코스 목록 응답
+//
+// include::{snippets}/index/http-response.adoc[]
+//
+// === 최근 올라온 코스 목록 응답
+//
+// include::{snippets}/index/http-response.adoc[]
+
+=== 새 코스 만들기
+
+==== Http Request
+include::{snippets}/course/create/http-request.adoc[]
+include::{snippets}/course/create/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/course/create/http-response.adoc[]
+include::{snippets}/course/create/response-fields.adoc[]
+
+=== 코스 단건 조회
+
+==== Http Request
+include::{snippets}/course/get-single/path-parameters.adoc[]
+include::{snippets}/course/get-single/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/course/get-single/http-response.adoc[]
+include::{snippets}/course/get-single/response-fields.adoc[]
+
+=== 코스 목록 조회
+
+==== Http Request
+include::{snippets}/course/get-list/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/course/get-list/http-response.adoc[]
+include::{snippets}/course/get-list/response-fields.adoc[]
+
+=== 코스 편집 요청
+
+==== Http Request
+include::{snippets}/course/update/path-parameters.adoc[]
+include::{snippets}/course/update/http-request.adoc[]
+include::{snippets}/course/update/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/course/update/http-response.adoc[]
+include::{snippets}/course/update/response-fields.adoc[]
+
+=== 코스 삭제 요청
+
+==== Http Request
+include::{snippets}/course/delete/path-parameters.adoc[]
+include::{snippets}/course/delete/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/course/delete/http-response.adoc[]
+include::{snippets}/course/delete/response-fields.adoc[]
+
+=== 내 코스 응답
+
+==== Http Request
+include::{snippets}/user/course/get/path-parameters.adoc[]
+include::{snippets}/user/course/get/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/user/course/get/http-response.adoc[]
+include::{snippets}/user/course/get/response-fields.adoc[]
+
+=== 코스 리뷰 응답
+
+// include::{snippets}/index/http-response.adoc[]
+
+=== ㅤ
+
+== 장소 API
+
+=== 장소 정보 응답
+
+지도 api 사용 예정
+
+=== 장소 리뷰 응답
+
+// include::{snippets}/index/http-response.adoc[]
+
+=== 즐겨찾기(폴더) 응답
+
+// include::{snippets}/index/http-response.adoc[]
+
+=== 장소 내 코스에 추가 요청
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== 장소 내 즐겨찾기(폴더)에 추가 요청
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== ㅤ
+
+=== 내 즐겨찾기(폴더) 응답
+
+// include::{snippets}/index/http-response.adoc[]
+
+=== 내 즐겨찾기(폴더) 삭제 요청
+
+// include::{snippets}/index/http-request.adoc[]
+
+=== 내 즐겨찾기(폴더) 안에 장소 응답
+
+// include::{snippets}/index/http-response.adoc[]
