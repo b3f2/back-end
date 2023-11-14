@@ -17,7 +17,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	asciidoctorExt
+	asciidoctorExtensions
 }
 
 ext {
@@ -59,7 +59,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// RestDocs
-	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
 	// QueryDSL (스프링부트 3 이상)
@@ -85,7 +85,7 @@ tasks.named('test') {
 
 asciidoctor {
 	inputs.dir snippetsDir
-	configurations 'asciidoctorExt'
+	configurations 'asciidoctorExtensions'
 	dependsOn test
 }
 
