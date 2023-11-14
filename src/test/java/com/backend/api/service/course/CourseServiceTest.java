@@ -9,6 +9,7 @@ import com.backend.api.request.course.CreateCourse;
 import com.backend.api.request.course.UpdateCourse;
 import com.backend.api.response.course.CourseResponse;
 import com.backend.api.response.user.LoginResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class CourseServiceTest extends ServiceTestSupport {
 
-    @BeforeEach
+    @AfterEach
     void setUp() {
         courseRepository.deleteAll();
         userRepository.deleteAll();
