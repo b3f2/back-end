@@ -87,12 +87,6 @@ asciidoctor {
 	inputs.dir snippetsDir
 	configurations 'asciidoctorExtensions'
 	dependsOn test
-
-	doFirst {
-		if (!snippetsDir.exists()) {
-			snippetsDir.mkdirs() // 폴더가 없으면 생성
-		}
-	}
 }
 
 bootJar {
