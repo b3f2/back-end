@@ -71,7 +71,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/course/create",
+                .andDo(document("course-create",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
@@ -105,7 +105,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/course/get-single",
+                .andDo(document("course-get-single",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
@@ -146,7 +146,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/course/get-list",
+                .andDo(document("course-get-list",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
@@ -184,7 +184,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/user/course/get",
+                .andDo(document("user-course-get",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
@@ -222,7 +222,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/course/update",
+                .andDo(document("course-update",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
@@ -253,7 +253,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("/course/delete",
+                .andDo(document("course-delete",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
