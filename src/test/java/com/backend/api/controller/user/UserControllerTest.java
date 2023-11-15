@@ -76,11 +76,11 @@ class UserControllerTest extends ControllerTestSupport {
                 .andExpect(jsonPath("$.code").value("200"))
                 .andExpect(jsonPath("$.status").value("OK"))
                 .andExpect(jsonPath("$.message").value("OK"))
-                .andExpect(jsonPath("$.data.email").value("userTest@gmail.com"))
+                .andExpect(jsonPath("$.data.email").value("user@gmail.com"))
                 .andExpect(jsonPath("$.data.nickName").value("user"))
-                .andExpect(jsonPath("$.data.address.city").value("집"))
-                .andExpect(jsonPath("$.data.address.street").value("주소"))
-                .andExpect(jsonPath("$.data.address.zipcode").value("호수"));
+                .andExpect(jsonPath("$.data.address.city").value("서울시"))
+                .andExpect(jsonPath("$.data.address.street").value("도봉로 106길 23"))
+                .andExpect(jsonPath("$.data.address.zipcode").value("102동 208호"));
     }
 
     @Test

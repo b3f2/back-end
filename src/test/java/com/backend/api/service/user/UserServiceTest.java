@@ -3,6 +3,7 @@ package com.backend.api.service.user;
 import com.backend.api.ServiceTestSupport;
 import com.backend.api.config.WithMockCustomUser;
 import com.backend.api.entity.user.Gender;
+import com.backend.api.entity.user.Role;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
 import com.backend.api.exception.InvalidSignUpException;
@@ -68,12 +69,9 @@ class UserServiceTest extends ServiceTestSupport {
     @DisplayName("사용자가 본인의 정보를 조회한다.")
     public void test2() {
         // given
-        User user = userCreate();
-
-        userRepository.save(user);
         Gender man = Gender.valueOf("MAN");
 
-        LoginResponse loginResponse = loginCreate(user);
+        LoginResponse loginResponse = loginCreate();
 
         // when
         UserResponse response = userService.get(loginResponse);
@@ -89,11 +87,7 @@ class UserServiceTest extends ServiceTestSupport {
     @DisplayName("사용자가 본인의 비밀번호만 수정을 하고 나머지 값들은 null로 보내도 원래의 값이 유지가 된다.")
     public void test3() {
         // given
-        User user = userCreate();
-
-        userRepository.save(user);
-
-        LoginResponse loginResponse = loginCreate(user);
+        LoginResponse loginResponse = loginCreate();
 
         Gender man = Gender.valueOf("MAN");
 
@@ -115,11 +109,7 @@ class UserServiceTest extends ServiceTestSupport {
     @DisplayName("사용자가 본인의 주소를 수정을 하고 나머지 값들은 null로 보내도 원래의 값이 유지가 된다.")
     public void test4() {
         // given
-        User user = userCreate();
-
-        userRepository.save(user);
-
-        LoginResponse loginResponse = loginCreate(user);
+        LoginResponse loginResponse = loginCreate();
 
         Gender man = Gender.valueOf("MAN");
 
@@ -139,14 +129,11 @@ class UserServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     @DisplayName("존재하는 회원이 탈퇴를 한다.")
     public void test5() {
         // given
-        User user = userCreate();
-
-        userRepository.save(user);
-
-        LoginResponse loginResponse = loginCreate(user);
+        LoginResponse loginResponse = loginCreate();
         // when
         userService.delete(loginResponse);
 
@@ -193,10 +180,10 @@ class UserServiceTest extends ServiceTestSupport {
                 .build();
     }
 
-    private LoginResponse loginCreate(User user) {
+    private LoginResponse loginCreate() {
         return LoginResponse.builder()
-                .email(user.getEmail())
-                .role(user.getRole())
+                .email("user@gmail.com")
+                .role(Role.ROLE_USER)
                 .build();
     }
 
