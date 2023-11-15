@@ -9,3 +9,5 @@ spring:
         - dev
       prod-env:
         - prod
+    include:
+      - jwt
