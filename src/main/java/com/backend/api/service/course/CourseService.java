@@ -2,6 +2,7 @@ package com.backend.api.service.course;
 
 import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.User;
+import com.backend.api.exception.InvalidUserException;
 import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.user.UserRepository;
@@ -43,18 +44,23 @@ public class CourseService {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 코스가 없습니다. id=" + id));
 
-        course.update(updateCourse.getName());
+        if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
+            throw new InvalidUserException();
+        }
 
-        userRepository.findByEmail(loginResponse.getEmail())
-                .orElseThrow(() -> new NoSuchElementException("해당 유저가 없습니다. email=" + loginResponse.getEmail()));
+        course.update(updateCourse.getName());
 
         return CourseResponse.of(course);
     }
 
     @Transactional
-    public void deleteCourse(Long id) {
+    public void deleteCourse(LoginResponse loginResponse, Long id) {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("해당 코스가 없습니다. id=" + id));
+
+        if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
+            throw new InvalidUserException();
+        }
 
         courseRepository.deleteById(id);
     }

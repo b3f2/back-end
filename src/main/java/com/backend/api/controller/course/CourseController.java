@@ -52,8 +52,8 @@ public class CourseController {
 
     //코스 단건 삭제(코스 id 값으로)
     @DeleteMapping("/courses/{id}")
-    public ApiResponse<CourseResponse> deleteCourse(@PathVariable Long id) {
-        courseService.deleteCourse(id);
+    public ApiResponse<CourseResponse> deleteCourse(@Login LoginResponse loginResponse, @PathVariable Long id) {
+        courseService.deleteCourse(loginResponse, id);
         return ApiResponse.<CourseResponse>builder()
                 .status(HttpStatus.OK)
                 .message("코스 제거 성공")
