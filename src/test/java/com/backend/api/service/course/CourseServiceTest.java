@@ -37,10 +37,10 @@ class CourseServiceTest extends ServiceTestSupport {
                 .nickName("user")
                 .address(Address.builder()
                         .city("서울시")
-                        .street("도봉로 106길 23")
-                        .zipcode("102동 208호")
+                        .street("상암로 12길 34")
+                        .zipcode("405동 607호")
                         .build())
-                .birth("20000418")
+                .birth("20001105")
                 .gender(Gender.MAN)
                 .build();
     }
@@ -77,9 +77,14 @@ class CourseServiceTest extends ServiceTestSupport {
     @DisplayName("코스 단건 조회")
     void getCourse() throws Exception {
         //given
+        User user = userCreate();
+        LoginResponse loginResponse = loginCreate(user);
+
         Course course = Course.builder()
                 .name("코스 1")
+                .user(user)
                 .build();
+
         courseRepository.save(course);
 
         //when
@@ -115,7 +120,11 @@ class CourseServiceTest extends ServiceTestSupport {
     @DisplayName("코스 수정")
     void updateCourse() throws Exception {
         //given
+        User user = userCreate();
+        LoginResponse loginResponse = loginCreate(user);
+
         Course course = Course.builder()
+                .user(user)
                 .name("코스 1")
                 .build();
         courseRepository.save(course);
@@ -124,9 +133,6 @@ class CourseServiceTest extends ServiceTestSupport {
                 .name("코스 2")
                 .build();
 
-        User user = userCreate();
-        userRepository.save(user);
-        LoginResponse loginResponse = loginCreate(user);
 
         //when
         courseService.updateCourse(loginResponse, course.getId(), updateCourse);
@@ -143,13 +149,19 @@ class CourseServiceTest extends ServiceTestSupport {
     @DisplayName("코스 삭제")
     void deleteCourse() throws Exception {
         //given
+
+        User user = userCreate();
+        LoginResponse loginResponse = loginCreate(user);
+
         Course course = Course.builder()
                 .name("코스 1")
+                .user(user)
                 .build();
+
         courseRepository.save(course);
 
         //when
-        courseService.deleteCourse(course.getId());
+        courseService.deleteCourse(loginResponse,course.getId());
 
         //then
         assertEquals(0, courseRepository.count());

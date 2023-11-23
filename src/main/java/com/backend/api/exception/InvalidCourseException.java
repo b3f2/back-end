@@ -11,6 +11,6 @@ public class InvalidCourseException extends ApiException{
 
     @Override
     public int getStatusCode() {
-        return 400;
+        return 404;
     }
 }

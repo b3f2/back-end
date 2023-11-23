@@ -267,6 +267,6 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.NULL)
                                         .description("응답 데이터"))));
-        verify(courseService, times(1)).deleteCourse(any(Long.class));
+        verify(courseService, times(1)).deleteCourse(any(LoginResponse.class), any(Long.class));
     }
 }
