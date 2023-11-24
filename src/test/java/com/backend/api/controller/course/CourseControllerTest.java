@@ -36,13 +36,10 @@ public class CourseControllerTest extends ControllerTestSupport {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private CourseRepository courseRepository;
-
     @AfterEach
     void setUp() {
-        courseRepository.deleteAll();
-        userRepository.deleteAll();
+        courseRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
     }
 
     private User userCreate() {

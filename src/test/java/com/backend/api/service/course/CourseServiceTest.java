@@ -26,8 +26,8 @@ class CourseServiceTest extends ServiceTestSupport {
 
     @AfterEach
     void setUp() {
-        courseRepository.deleteAll();
-        userRepository.deleteAll();
+        courseRepository.deleteAllInBatch();
+        userRepository.deleteAllInBatch();
     }
 
     private User userCreate() {
