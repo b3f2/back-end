@@ -6,16 +6,12 @@ import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.Gender;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
-import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.request.course.CreateCourse;
 import com.backend.api.request.course.UpdateCourse;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -28,9 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Slf4j
-@SpringBootTest
-@AutoConfigureMockMvc
 public class CourseControllerTest extends ControllerTestSupport {
 
     @Autowired

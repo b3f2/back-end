@@ -10,10 +10,8 @@ import com.backend.api.request.course.UpdateCourse;
 import com.backend.api.response.course.CourseResponse;
 import com.backend.api.response.user.LoginResponse;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -21,7 +19,6 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 class CourseServiceTest extends ServiceTestSupport {
 
     @AfterEach
