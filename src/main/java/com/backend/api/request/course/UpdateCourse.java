@@ -1,17 +1,14 @@
 package com.backend.api.request.course;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UpdateCourse {
 
-    @NotBlank(message = "코스명을 입력해주세요")
+    @NotBlank(message = "코스명을 입력해 주세요")
     private String name;
 
     @Builder

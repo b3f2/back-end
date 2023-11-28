@@ -2,6 +2,7 @@ package com.backend.api.entity.course;
 
 import com.backend.api.entity.user.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Course {
 
     @Id
@@ -20,7 +21,6 @@ public class Course {
     private Long id;
 
     @ManyToOne(fetch = LAZY, cascade = ALL)
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)

@@ -93,7 +93,7 @@ public class CourseControllerTest extends ControllerTestSupport {
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("400"))
-                .andExpect(jsonPath("$.message").value("코스명을 입력해주세요"))
+                .andExpect(jsonPath("$.message").value("코스명을 입력해 주세요"))
                 .andExpect(jsonPath("$.data").isEmpty());
 
         assertEquals(0L, courseRepository.count());
