@@ -3,7 +3,6 @@ package com.backend.api.entity.course;
 import com.backend.api.entity.local.Local;
 import jakarta.persistence.*;
 
-import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -16,10 +15,10 @@ public class CourseLocal {
     @Column(nullable = false)
     private int turn;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     private Course course;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     private Local local;
 
 }
