@@ -5,6 +5,7 @@ import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.Gender;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
+import com.backend.api.exception.InvalidCourseException;
 import com.backend.api.request.course.CreateCourse;
 import com.backend.api.request.course.UpdateCourse;
 import com.backend.api.response.course.CourseResponse;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,7 +75,8 @@ class CourseServiceTest extends ServiceTestSupport {
     void getCourse() throws Exception {
         //given
         User user = userCreate();
-        LoginResponse loginResponse = loginCreate(user);
+
+        userRepository.save(user);
 
         Course course = Course.builder()
                 .name("코스 1")
@@ -120,6 +121,8 @@ class CourseServiceTest extends ServiceTestSupport {
         User user = userCreate();
         LoginResponse loginResponse = loginCreate(user);
 
+        userRepository.save(user);
+
         Course course = Course.builder()
                 .user(user)
                 .name("코스 1")
@@ -136,7 +139,7 @@ class CourseServiceTest extends ServiceTestSupport {
 
         //then
         Course updatedCourse = courseRepository.findById(course.getId())
-                .orElseThrow(() -> new NoSuchElementException("해당 코스가 없습니다. id=" + 1L));
+                .orElseThrow(InvalidCourseException::new);
 
         assertEquals(1, courseRepository.count());
         assertEquals("코스 2", courseRepository.findAll().get(0).getName());
@@ -148,6 +151,9 @@ class CourseServiceTest extends ServiceTestSupport {
         //given
 
         User user = userCreate();
+
+        userRepository.save(user);
+
         LoginResponse loginResponse = loginCreate(user);
 
         Course course = Course.builder()

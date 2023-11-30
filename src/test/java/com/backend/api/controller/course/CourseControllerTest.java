@@ -11,8 +11,6 @@ import com.backend.api.request.course.UpdateCourse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -25,9 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class CourseControllerTest extends ControllerTestSupport {
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @AfterEach
     void setUp() {
@@ -105,6 +100,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         //given
         User user = userCreate();
 
+        userRepository.save(user);
+
         Course course = Course.builder()
                 .name("코스 1")
                 .user(user)
@@ -135,6 +132,8 @@ public class CourseControllerTest extends ControllerTestSupport {
     void getList() throws Exception {
         //given
         User user = userCreate();
+
+        userRepository.save(user);
 
         List<Course> courses = IntStream.range(1, 30)
                 .mapToObj(i -> Course.builder()
@@ -171,6 +170,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         //given
         User user = userCreate();
 
+        userRepository.save(user);
+
         Course course = Course.builder()
                 .name("수정 전 코스")
                 .user(user)
@@ -191,6 +192,7 @@ public class CourseControllerTest extends ControllerTestSupport {
                 )
                 .andDo(print())
                 .andExpect(status().isOk());
+        assertEquals("수정된 코스", courseRepository.findAll().get(0).getName());
     }
 
     @Test
@@ -235,6 +237,8 @@ public class CourseControllerTest extends ControllerTestSupport {
                 .gender(Gender.MAN)
                 .build();
 
+        userRepository.save(anotherUser);
+
         Course course = Course.builder()
                 .name("수정 전 코스")
                 .user(anotherUser)
@@ -267,6 +271,8 @@ public class CourseControllerTest extends ControllerTestSupport {
     void deleteCourse() throws Exception {
         //given
         User user = userCreate();
+
+        userRepository.save(user);
 
         Course course = Course.builder()
                 .name("수정 전 코스")
