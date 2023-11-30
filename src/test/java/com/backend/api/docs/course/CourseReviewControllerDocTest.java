@@ -1,12 +1,12 @@
 package com.backend.api.docs.course;
 
-import com.backend.api.controller.course.CourseController;
+import com.backend.api.controller.course.CourseReviewController;
 import com.backend.api.docs.RestDocsSupport;
-import com.backend.api.request.course.CreateCourse;
-import com.backend.api.request.course.UpdateCourse;
-import com.backend.api.response.course.CourseResponse;
+import com.backend.api.request.course.CreateCourseReview;
+import com.backend.api.request.course.UpdateCourseReview;
+import com.backend.api.response.course.CourseReviewResponse;
 import com.backend.api.response.user.LoginResponse;
-import com.backend.api.service.course.CourseService;
+import com.backend.api.service.course.CourseReviewService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -26,52 +26,47 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class CourseControllerDocTest extends RestDocsSupport {
+public class CourseReviewControllerDocTest extends RestDocsSupport {
 
-    private final CourseService courseService = mock(CourseService.class);
+    private final CourseReviewService courseReviewService = mock(CourseReviewService.class);
 
     @Override
     protected Object initController() {
-        return new CourseController(courseService);
-    }
-
-
-    @Test
-    @DisplayName("테스트")
-    void test1() throws Exception {
-        //expected
-        mockMvc.perform(get("/api/restDocsTest")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andDo(document("index"));
+        return new CourseReviewController(courseReviewService);
     }
 
     @Test
-    @DisplayName("코스 생성")
-    void createCourse() throws Exception {
-        CreateCourse course = CreateCourse.builder()
-                .name("코스 1")
+    @DisplayName("코스 리뷰 생성")
+    void createCourseReview() throws Exception {
+        CreateCourseReview course = CreateCourseReview.builder()
+                .content("코스 리뷰")
+                .rating(5)
+                .courseId(1L)
                 .build();
 
-        given(courseService.createCourse(any(CreateCourse.class), any(LoginResponse.class)))
-                .willReturn(CourseResponse.builder()
-                        .name("코스 1")
+        given(courseReviewService.createCourseReview(any(CreateCourseReview.class), any(LoginResponse.class)))
+                .willReturn(CourseReviewResponse.builder()
+                        .content("코스 리뷰")
+                        .rating(5)
                         .build());
 
         //expected
-        mockMvc.perform(post("/api/courses")
+        mockMvc.perform(post("/api/courseReview")
                         .content(objectMapper.writeValueAsString(course))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("course-create",
+                .andDo(document("courseReview-create",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         requestFields(
-                                fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("코스 이름")),
+                                fieldWithPath("content").type(JsonFieldType.STRING)
+                                        .description("코스 리뷰 내용"),
+                                fieldWithPath("rating").type(JsonFieldType.NUMBER)
+                                        .description("평점"),
+                                fieldWithPath("courseId").type(JsonFieldType.NUMBER)
+                                        .description("코스 아이디")),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -81,67 +76,46 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.OBJECT)
                                         .description("응답 데이터"),
-                                fieldWithPath("data.name").type(JsonFieldType.STRING)
-                                        .description("코스 1"))
+                                fieldWithPath("data.content").type(JsonFieldType.STRING)
+                                        .description("코스 리뷰"),
+                                fieldWithPath("data.rating").type(JsonFieldType.NUMBER)
+                                        .description("평점"))
                 ));
     }
 
     @Test
-    @DisplayName("코스 단건 조회")
-    void getCourse() throws Exception {
-        given(courseService.getCourse(any(Long.class)))
-                .willReturn(CourseResponse.builder()
-                        .name("코스 1")
-                        .build());
-
-        //expected
-        mockMvc.perform(get("/api/courses/{id}", 1L)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .characterEncoding("UTF-8"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andDo(document("course-get-single",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        pathParameters(
-                                parameterWithName("id").description("코스 ID")),
-                        responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER)
-                                        .description("코드"),
-                                fieldWithPath("status").type(JsonFieldType.STRING)
-                                        .description("상태"),
-                                fieldWithPath("message").type(JsonFieldType.STRING)
-                                        .description("메세지"),
-                                fieldWithPath("data").type(JsonFieldType.OBJECT)
-                                        .description("응답 데이터"),
-                                fieldWithPath("data.name").type(JsonFieldType.STRING)
-                                        .description("코스 1"))));
-
-    }
-
-    @Test
-    @DisplayName("코스 목록 조회")
-    void getCourseList() throws Exception {
-        given(courseService.getList())
+    @DisplayName("모든 코스 리뷰 조회")
+    void getCourseReviewList() throws Exception {
+        given(courseReviewService.getList())
                 .willReturn(List.of(
-                        CourseResponse.builder()
-                                .name("코스 1")
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰")
+                                .rating(5)
                                 .build(),
-                        CourseResponse.builder()
-                                .name("코스 2")
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰2")
+                                .rating(4)
                                 .build(),
-                        CourseResponse.builder()
-                                .name("코스 3")
-                                .build()
-                ));
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰3")
+                                .rating(3)
+                                .build(),
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰4")
+                                .rating(2)
+                                .build(),
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰5")
+                                .rating(1)
+                                .build()));
 
         //expected
-        mockMvc.perform(get("/api/courses")
+        mockMvc.perform(get("/api/courseReview")
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("course-get-list",
+                .andDo(document("courseReview-get-list",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
@@ -153,33 +127,38 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.ARRAY)
                                         .description("응답 데이터"),
-                                fieldWithPath("data[].name").type(JsonFieldType.STRING)
-                                        .description("코스 목록"))));
+                                fieldWithPath("data[].content").type(JsonFieldType.STRING)
+                                        .description("코스 리뷰"),
+                                fieldWithPath("data[].rating").type(JsonFieldType.NUMBER)
+                                        .description("평점"))));
+
     }
 
     @Test
-    @DisplayName("내 코스 조회")
-    void getUserCourse() throws Exception {
-        given(courseService.getCoursesByUserId(any(Long.class)))
+    @DisplayName("사용자의 코스 리뷰 조회")
+    void getCourseReviewByUserId() throws Exception {
+        given(courseReviewService.getCourseReview(any(Long.class)))
                 .willReturn(List.of(
-                        CourseResponse.builder()
-                                .name("내 코스 1")
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰")
+                                .rating(5)
                                 .build(),
-                        CourseResponse.builder()
-                                .name("내 코스 2")
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰2")
+                                .rating(4)
                                 .build(),
-                        CourseResponse.builder()
-                                .name("내 코스 3")
-                                .build()
-                ));
+                        CourseReviewResponse.builder()
+                                .content("코스 리뷰3")
+                                .rating(3)
+                                .build()));
 
         //expected
-        mockMvc.perform(get("/api/users/courses/{userId}", 1L)
+        mockMvc.perform(get("/api/courseReview/{userId}", 1L)
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("course-get-by-userId",
+                .andDo(document("courseReview-get-by-userId",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
@@ -193,38 +172,47 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.ARRAY)
                                         .description("응답 데이터"),
-                                fieldWithPath("data[].name").type(JsonFieldType.STRING)
-                                        .description("코스 목록"))));
+                                fieldWithPath("data[].content").type(JsonFieldType.STRING)
+                                        .description("코스 리뷰"),
+                                fieldWithPath("data[].rating").type(JsonFieldType.NUMBER)
+                                        .description("평점"))));
 
     }
 
     @Test
-    @DisplayName("코스 편집")
+    @DisplayName("코스 리뷰 편집")
     void updateUserCourse() throws Exception {
-        given(courseService.updateCourse(any(LoginResponse.class), any(Long.class), any(UpdateCourse.class)))
-                .willReturn(CourseResponse.builder()
-                        .name("편집된 코스")
+        given(courseReviewService.updateCourseReview(any(LoginResponse.class), any(Long.class), any(UpdateCourseReview.class)))
+                .willReturn(CourseReviewResponse.builder()
+                        .content("편집된 코스 리뷰")
+                        .rating(5)
                         .build());
 
-        UpdateCourse updateCourse = UpdateCourse.builder()
-                .name("코스 1")
+        UpdateCourseReview updateCourseReview = UpdateCourseReview.builder()
+                .content("코스 리뷰")
+                .rating(0)
+                .courseId(1L)
                 .build();
 
         //expected
-        mockMvc.perform(patch("/api/courses/{id}", 1L)
-                        .content(objectMapper.writeValueAsString(updateCourse))
+        mockMvc.perform(patch("/api/courseReview/{id}", 1L)
+                        .content(objectMapper.writeValueAsString(updateCourseReview))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("course-update",
+                .andDo(document("courseReview-update",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
-                                parameterWithName("id").description("코스 ID")),
+                                parameterWithName("id").description("코스 리뷰 ID")),
                         requestFields(
-                                fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("코스 이름")),
+                                fieldWithPath("content").type(JsonFieldType.STRING)
+                                        .description("수정 하려는 코스 리뷰 내용"),
+                                fieldWithPath("rating").type(JsonFieldType.NUMBER)
+                                        .description("수정 하려는 평점"),
+                                fieldWithPath("courseId").type(JsonFieldType.NUMBER)
+                                        .description("리뷰 남길 코스 아이디")),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -234,25 +222,27 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.OBJECT)
                                         .description("응답 데이터"),
-                                fieldWithPath("data.name").type(JsonFieldType.STRING)
-                                        .description("수정된 코스"))));
+                                fieldWithPath("data.content").type(JsonFieldType.STRING)
+                                        .description("수정된 코스"),
+                                fieldWithPath("data.rating").type(JsonFieldType.NUMBER)
+                                        .description("수정된 평점"))));
     }
 
     @Test
-    @DisplayName("코스 삭제")
+    @DisplayName("코스 리뷰 삭제")
     void deleteUserCourse() throws Exception {
 
         //expected
-        mockMvc.perform(delete("/api/courses/{id}", 1L)
+        mockMvc.perform(delete("/api/courseReview/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("course-delete",
+                .andDo(document("courseReview-delete",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         pathParameters(
-                                parameterWithName("id").description("코스 ID")),
+                                parameterWithName("id").description("코스 리뷰 ID")),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -262,6 +252,6 @@ class CourseControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.NULL)
                                         .description("응답 데이터"))));
-        verify(courseService, times(1)).deleteCourse(any(LoginResponse.class), any(Long.class));
+        verify(courseReviewService, times(1)).deleteCourseReview(any(LoginResponse.class), any(Long.class));
     }
 }
