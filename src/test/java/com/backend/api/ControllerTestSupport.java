@@ -1,6 +1,7 @@
 package com.backend.api;
 
 import com.backend.api.repository.course.CourseRepository;
+import com.backend.api.repository.course.CourseReviewRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,8 @@ public abstract class ControllerTestSupport {
 
     @Autowired
     protected CourseRepository courseRepository;
+
+    @Autowired
+    protected CourseReviewRepository courseReviewRepository;
+
 }
