@@ -56,7 +56,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
         String json = objectMapper.writeValueAsString(courseReview);
 
         //expected
-        mockMvc.perform(post("/api/courseReview")
+        mockMvc.perform(post("/api/course-review")
                         .contentType(APPLICATION_JSON)
                         .content(json)
                 )
@@ -93,7 +93,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
         String json = objectMapper.writeValueAsString(courseReview);
 
         //expected
-        mockMvc.perform(post("/api/courseReview")
+        mockMvc.perform(post("/api/course-review")
                         .contentType(APPLICATION_JSON)
                         .content(json)
                 )
@@ -107,9 +107,44 @@ class CourseReviewControllerTest extends ControllerTestSupport {
     }
 
     @Test
-    @DisplayName("모든 코스 리뷰 조회")
+    @DisplayName("코스 리뷰 단건 조회")
     @WithMockCustomUser
     void getCourseReview() throws Exception {
+        //given
+        User user = userRepository.findByEmail("user@gmail.com")
+                .orElseThrow(UserNotFoundException::new);
+
+        Course course = Course.builder()
+                .name("코스 1")
+                .user(user)
+                .build();
+        courseRepository.save(course);
+
+        CourseReview courseReview = CourseReview.builder()
+                .course(course)
+                .content("코스 리뷰")
+                .rating(5)
+                .build();
+
+        courseReviewRepository.save(courseReview);
+
+        //expected
+        mockMvc.perform(get("/api/course-review/{id}", courseReview.getId()))
+                .andDo(print())
+                .andExpect(status().isOk());
+        CourseReview getCourseReview = courseReviewRepository.findAll().get(0);
+
+        assertEquals(1, courseReviewRepository.count());
+        assertEquals("코스 리뷰", getCourseReview.getContent());
+        assertEquals(5, getCourseReview.getRating());
+        assertEquals(1L, userRepository.count());
+        assertEquals(1L, courseRepository.count());
+    }
+
+    @Test
+    @DisplayName("모든 코스 리뷰 조회")
+    @WithMockCustomUser
+    void getCourseReviewList() throws Exception {
         //given
         User user = userRepository.findByEmail("user@gmail.com")
                 .orElseThrow(UserNotFoundException::new);
@@ -130,10 +165,8 @@ class CourseReviewControllerTest extends ControllerTestSupport {
 
         courseReviewRepository.saveAll(courses);
 
-        String json = objectMapper.writeValueAsString(courses);
-
         //expected
-        mockMvc.perform(get("/api/courseReview"))
+        mockMvc.perform(get("/api/course-review"))
                 .andDo(print())
                 .andExpect(status().isOk());
         List<CourseReview> courseReviewList = courseReviewRepository.findAll();
@@ -173,7 +206,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
 
 
         //expected
-        mockMvc.perform(get("/api/courseReview/{userId}", user.getId()))
+        mockMvc.perform(get("/api/users/{userId}/course-review", user.getId()))
                 .andDo(print())
                 .andExpect(status().isOk());
         List<CourseReview> courseReviewList = courseReviewRepository.findAll();
@@ -191,7 +224,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
     @DisplayName("없는 코스 리뷰 조회")
     void getEmptyCourseReview() throws Exception {
         //expected
-        mockMvc.perform(get("/api/courseReview"))
+        mockMvc.perform(get("/api/course-review"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isEmpty());
@@ -229,7 +262,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
         String json = objectMapper.writeValueAsString(updateCourseReview);
 
         //expected
-        mockMvc.perform(patch("/api/courseReview/{id}", courseReview.getId())
+        mockMvc.perform(patch("/api/course-review/{id}", courseReview.getId())
                         .contentType(APPLICATION_JSON)
                         .content(json)
                 )

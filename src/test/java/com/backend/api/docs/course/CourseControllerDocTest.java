@@ -35,18 +35,6 @@ class CourseControllerDocTest extends RestDocsSupport {
         return new CourseController(courseService);
     }
 
-
-    @Test
-    @DisplayName("테스트")
-    void test1() throws Exception {
-        //expected
-        mockMvc.perform(get("/api/restDocsTest")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andDo(document("index"));
-    }
-
     @Test
     @DisplayName("코스 생성")
     void createCourse() throws Exception {
@@ -158,7 +146,7 @@ class CourseControllerDocTest extends RestDocsSupport {
     }
 
     @Test
-    @DisplayName("내 코스 조회")
+    @DisplayName("사용자의 코스 조회")
     void getUserCourse() throws Exception {
         given(courseService.getCoursesByUserId(any(Long.class)))
                 .willReturn(List.of(
@@ -174,7 +162,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                 ));
 
         //expected
-        mockMvc.perform(get("/api/users/courses/{userId}", 1L)
+        mockMvc.perform(get("/api/users/{userId}/courses", 1L)
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())

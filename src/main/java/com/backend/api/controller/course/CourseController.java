@@ -21,11 +21,6 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    @GetMapping("/restDocsTest")
-    public String restDocsTestAPI() {
-        return "test";
-    }
-
     //코스 생성
     @PostMapping("/courses")
     public ApiResponse<CourseResponse> createCourse(@Login LoginResponse loginResponse, @RequestBody @Valid CreateCourse request) {
@@ -61,7 +56,7 @@ public class CourseController {
     }
 
     //코스 목록 조회(사용자 id 값으로)
-    @GetMapping("/users/courses/{userId}")
+    @GetMapping("/users/{userId}/courses")
     public ApiResponse<List<CourseResponse>> getUserCourses(@PathVariable Long userId) {
         return ApiResponse.ok(courseService.getCoursesByUserId(userId));
     }

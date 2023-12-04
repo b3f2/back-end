@@ -47,15 +47,22 @@ public class CourseReviewService {
         return CourseReviewResponse.of(courseReviewRepository.save(courseReview));
     }
 
+    public CourseReviewResponse getCourseReview(Long id) {
+        CourseReview courseReview = courseReviewRepository.findById(id)
+                .orElseThrow(CourseReviewNotFoundException::new);
+
+        return CourseReviewResponse.builder()
+                .content(courseReview.getContent())
+                .rating(courseReview.getRating())
+                .build();
+    }
+
     @Transactional
     public CourseReviewResponse updateCourseReview(LoginResponse loginResponse, Long id, UpdateCourseReview updateCourseReview) {
-        User user = userRepository.findByEmail(loginResponse.getEmail())
-                .orElseThrow(UserNotFoundException::new);
-
         Course course = courseRepository.findById(updateCourseReview.getCourseId())
                 .orElseThrow(InvalidCourseException::new);
 
-        if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
+        if (!course.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
         }
 
@@ -72,7 +79,7 @@ public class CourseReviewService {
         CourseReview courseReview = courseReviewRepository.findById(id)
                 .orElseThrow(CourseReviewNotFoundException::new);
 
-        if(!courseReview.getUser().getEmail().equals(loginResponse.getEmail())) {
+        if (!courseReview.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
         }
 
@@ -85,7 +92,7 @@ public class CourseReviewService {
                 .toList();
     }
 
-    public List<CourseReviewResponse> getCourseReview(Long userId){
+    public List<CourseReviewResponse> getCourseReviewByUserId(Long userId) {
         return courseReviewRepository.findByUserId(userId).stream()
                 .map(CourseReviewResponse::new)
                 .toList();

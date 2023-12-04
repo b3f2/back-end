@@ -151,6 +151,40 @@ public class CourseControllerTest extends ControllerTestSupport {
                 .andExpect(jsonPath("$.data[0].name").value("코스 1"))
                 .andExpect(jsonPath("$.data[28].name").value("코스 29"));
     }
+    @Test
+    @DisplayName("사용자의 코스 목록 조회")
+    void getListByUserId() throws Exception {
+        //given
+        User user = userCreate();
+
+        userRepository.save(user);
+
+        List<Course> courses = IntStream.range(1, 30)
+                .mapToObj(i -> Course.builder()
+                        .name("코스 " + i)
+                        .user(user)
+                        .build())
+                .toList();
+        courseRepository.saveAll(courses);
+
+        //expected
+        mockMvc.perform(get("/api/users/{userId}/courses", user.getId()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].name").value("코스 1"))
+                .andExpect(jsonPath("$.data[28].name").value("코스 29"));
+    }
+
+    @Test
+    @DisplayName("없는 사용자의 코스 목록 조회")
+    void getEmptyListByUserId() throws Exception {
+        //expected
+        mockMvc.perform(get("/api/users/{userId}/courses", 1L))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").isEmpty());
+
+    }
 
     @Test
     @DisplayName("없는 코스 목록 조회")

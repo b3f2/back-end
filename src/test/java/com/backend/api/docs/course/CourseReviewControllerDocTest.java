@@ -51,7 +51,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                         .build());
 
         //expected
-        mockMvc.perform(post("/api/courseReview")
+        mockMvc.perform(post("/api/course-review")
                         .content(objectMapper.writeValueAsString(course))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
@@ -84,6 +84,42 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
     }
 
     @Test
+    @DisplayName("코스 리뷰 단건 조회")
+    void getCourse() throws Exception {
+        given(courseReviewService.getCourseReview(any(Long.class)))
+                .willReturn(CourseReviewResponse.builder()
+                        .content("코스 리뷰")
+                        .rating(5)
+                        .build());
+
+        //expected
+        mockMvc.perform(get("/api/course-review/{id}", 1L)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("courseReview-get-single",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(
+                                parameterWithName("id").description("코스 ID")),
+                        responseFields(
+                                fieldWithPath("code").type(JsonFieldType.NUMBER)
+                                        .description("코드"),
+                                fieldWithPath("status").type(JsonFieldType.STRING)
+                                        .description("상태"),
+                                fieldWithPath("message").type(JsonFieldType.STRING)
+                                        .description("메세지"),
+                                fieldWithPath("data").type(JsonFieldType.OBJECT)
+                                        .description("응답 데이터"),
+                                fieldWithPath("data.content").type(JsonFieldType.STRING)
+                                        .description("코스 리뷰"),
+                                fieldWithPath("data.rating").type(JsonFieldType.NUMBER)
+                                        .description("평점"))));
+
+    }
+
+    @Test
     @DisplayName("모든 코스 리뷰 조회")
     void getCourseReviewList() throws Exception {
         given(courseReviewService.getList())
@@ -110,7 +146,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                                 .build()));
 
         //expected
-        mockMvc.perform(get("/api/courseReview")
+        mockMvc.perform(get("/api/course-review")
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
@@ -137,7 +173,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
     @Test
     @DisplayName("사용자의 코스 리뷰 조회")
     void getCourseReviewByUserId() throws Exception {
-        given(courseReviewService.getCourseReview(any(Long.class)))
+        given(courseReviewService.getCourseReviewByUserId(any(Long.class)))
                 .willReturn(List.of(
                         CourseReviewResponse.builder()
                                 .content("코스 리뷰")
@@ -153,7 +189,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                                 .build()));
 
         //expected
-        mockMvc.perform(get("/api/courseReview/{userId}", 1L)
+        mockMvc.perform(get("/api/users/{userId}/course-review", 1L)
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
@@ -195,7 +231,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                 .build();
 
         //expected
-        mockMvc.perform(patch("/api/courseReview/{id}", 1L)
+        mockMvc.perform(patch("/api/course-review/{id}", 1L)
                         .content(objectMapper.writeValueAsString(updateCourseReview))
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
@@ -233,7 +269,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
     void deleteUserCourse() throws Exception {
 
         //expected
-        mockMvc.perform(delete("/api/courseReview/{id}", 1L)
+        mockMvc.perform(delete("/api/course-review/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())

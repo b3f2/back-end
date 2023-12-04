@@ -85,8 +85,47 @@ class CourseReviewServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("코스 리뷰 조회")
-    void getCourse() throws Exception {
+    @DisplayName("코스 리뷰 조회(id)")
+    void getCourseReviewById() throws Exception {
+        //given
+        User user = userCreate();
+
+        userRepository.save(user);
+
+        LoginResponse loginResponse = loginCreate(user);
+
+        Course course = Course.builder()
+                .name("코스 1")
+                .user(user)
+                .build();
+
+        //when
+        courseRepository.save(course);
+
+        CreateCourseReview courseReview = CreateCourseReview.builder()
+                .content("코스 리뷰 1")
+                .rating(4)
+                .courseId(course.getId())
+                .build();
+
+        courseReviewService.createCourseReview(courseReview, loginResponse);
+
+        Long id = courseReviewRepository.findAll().get(0).getId();
+
+        //when
+        CourseReviewResponse courseReviewResponse = courseReviewService.getCourseReview(id);
+
+        //then
+        assertEquals(1, courseReviewRepository.count());
+        assertEquals("코스 리뷰 1", courseReviewResponse.getContent());
+        assertEquals(4, courseReviewResponse.getRating());
+
+
+    }
+
+    @Test
+    @DisplayName("코스 리뷰 조회(userId)")
+    void getCourseReviewByUserId() throws Exception {
         //given
         User user = userCreate();
 
@@ -111,7 +150,7 @@ class CourseReviewServiceTest extends ServiceTestSupport {
         courseReviewService.createCourseReview(courseReview, loginResponse);
 
         //when
-        List<CourseReviewResponse> courseReviewResponse = courseReviewService.getCourseReview(user.getId());
+        List<CourseReviewResponse> courseReviewResponse = courseReviewService.getCourseReviewByUserId(user.getId());
 
         //then
         assertEquals(1, courseReviewRepository.count());
@@ -122,8 +161,8 @@ class CourseReviewServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @DisplayName("코스 리뷰 여러개 조회")
-    void getList() throws Exception {
+    @DisplayName("모든 코스 리뷰 조회")
+    void getCourseReviewList() throws Exception {
         //given
         User user = userCreate();
 
@@ -134,11 +173,14 @@ class CourseReviewServiceTest extends ServiceTestSupport {
                 .user(user)
                 .build();
 
+        courseRepository.save(course);
+
         List<CourseReview> courseReviews = IntStream.range(1, 30)
                 .mapToObj(i -> CourseReview.builder()
                         .content("리뷰 내용 " + i)
                         .rating(Math.min(i, 5))
                         .user(user)
+                        .course(course)
                         .build())
                 .toList();
 
@@ -158,7 +200,7 @@ class CourseReviewServiceTest extends ServiceTestSupport {
 
     @Test
     @DisplayName("코스 리뷰 수정")
-    void updateCourse() throws Exception {
+    void updateCourseReview() throws Exception {
         //given
         User user = userCreate();
 
@@ -201,7 +243,7 @@ class CourseReviewServiceTest extends ServiceTestSupport {
 
     @Test
     @DisplayName("코스 리뷰 삭제")
-    void deleteCourse() throws Exception {
+    void deleteCourseReview() throws Exception {
         //given
         User user = userCreate();
 
