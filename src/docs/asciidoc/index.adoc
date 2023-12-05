@@ -9,18 +9,43 @@
 
 == 회원 API
 
-=== 회원 가입 요청
+=== 회원 가입
 
-// include::{snippets}/index/http-request.adoc[]
+==== Http Request
+include::{snippets}/user-signup/http-request.adoc[]
+include::{snippets}/user-signup/request-fields.adoc[]
 
-=== 로그인 요청
+==== Http Response
+include::{snippets}/user-signup/http-response.adoc[]
+include::{snippets}/user-signup/response-fields.adoc[]
 
-// include::{snippets}/index/http-request.adoc[]
+=== 회원 정보 조회
 
-=== 내 정보 수정
+==== Http Request
+include::{snippets}/user-profile/http-request.adoc[]
 
-// include::{snippets}/index/http-request.adoc[]
+==== Http Response
+include::{snippets}/user-signup/http-response.adoc[]
+include::{snippets}/user-signup/response-fields.adoc[]
 
+=== 회원 정보 수정
+
+==== Http Request
+include::{snippets}/user-edit/http-request.adoc[]
+include::{snippets}/user-edit/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/user-edit/http-response.adoc[]
+include::{snippets}/user-edit/response-fields.adoc[]
+
+=== 회원 삭제
+
+==== Http Request
+include::{snippets}/user-delete/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/user-delete/http-response.adoc[]
+include::{snippets}/user-delete/response-fields.adoc[]
 === ㅤ
 
 == 코스 API
