@@ -40,7 +40,7 @@ jobs:
           DEV_SECRET_DIR_FILE_NAME: application-dev.yml
         run: echo $DEV_SECRET | base64 --decode >> $DEV_SECRET_DIR/$DEV_SECRET_DIR_FILE_NAME
 
-       # application-jwt.yml
+      # application-jwt.yml
       - name: Copy jwt Secret
         env:
           DEV_SECRET: ${{ secrets.APPLICATION_JWT_YML }}
@@ -52,9 +52,9 @@ jobs:
       - name: ./gradlew 권한 설정
         run: chmod +x ./gradlew
 
-      # Gradle Build (Test 제외)
+      # Gradle Build
       - name: Build with Gradle
-        run: ./gradlew build -x test
+        run: ./gradlew build
 
       # Docker Build하고 DockerHub에 Push
       - name: Docker Build & Push to DockerHub
