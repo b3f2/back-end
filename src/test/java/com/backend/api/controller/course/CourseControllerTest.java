@@ -6,6 +6,7 @@ import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.Gender;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
+import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.request.course.CreateCourse;
 import com.backend.api.request.course.UpdateCourse;
 import org.junit.jupiter.api.AfterEach;
@@ -202,9 +203,8 @@ public class CourseControllerTest extends ControllerTestSupport {
     @WithMockCustomUser
     void updateCourse() throws Exception {
         //given
-        User user = userCreate();
-
-        userRepository.save(user);
+        User user = userRepository.findByEmail("user@gmail.com")
+                .orElseThrow(UserNotFoundException::new);
 
         Course course = Course.builder()
                 .name("수정 전 코스")
@@ -304,9 +304,8 @@ public class CourseControllerTest extends ControllerTestSupport {
     @WithMockCustomUser
     void deleteCourse() throws Exception {
         //given
-        User user = userCreate();
-
-        userRepository.save(user);
+        User user = userRepository.findByEmail("user@gmail.com")
+                .orElseThrow(UserNotFoundException::new);
 
         Course course = Course.builder()
                 .name("수정 전 코스")
