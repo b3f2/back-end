@@ -2,7 +2,6 @@ package com.backend.api.entity.user;
 
 import com.backend.api.entity.util.Address;
 import com.backend.api.entity.util.BaseEntity;
-import com.backend.api.request.oauth2.OauthEdit;
 import com.backend.api.request.user.JoinRequest;
 import com.backend.api.request.user.UserEdit;
 import jakarta.persistence.*;
@@ -22,9 +21,11 @@ public class User extends BaseEntity {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -33,8 +34,10 @@ public class User extends BaseEntity {
     @Embedded
     private Address address;
 
+    @Column(nullable = false)
     private String birth;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -43,10 +46,8 @@ public class User extends BaseEntity {
 
     private String refreshToken;
 
-    private String oauthId;
-
     @Builder
-    private User(String email, String password, String nickName, Address address, String birth, Gender gender, Role role, String refreshToken, String oauthId) {
+    private User(String email, String password, String nickName, Address address, String birth, Gender gender, Role role, String refreshToken) {
         this.email = email;
         this.password = password;
         this.nickName = nickName;
@@ -55,7 +56,6 @@ public class User extends BaseEntity {
         this.gender = gender;
         this.role = role;
         this.refreshToken = refreshToken;
-        this.oauthId = oauthId;
     }
 
     public static User toEntity(JoinRequest request, String password) {
@@ -90,22 +90,5 @@ public class User extends BaseEntity {
 
         address.edit(userEdit.getCity(), userEdit.getStreet(), userEdit.getZipcode());
 
-    }
-
-    public void oauthIdCreate(String oauthId) {
-        this.oauthId = oauthId;
-    }
-
-    public User addInformation(OauthEdit oauthEdit, String password) {
-        return User.builder()
-                .password(password)
-                .address(Address.builder()
-                        .city(oauthEdit.getCity())
-                        .street(oauthEdit.getStreet())
-                        .zipcode(oauthEdit.getZipcode())
-                        .build())
-                .birth(oauthEdit.getBirth())
-                .gender(Gender.valueOf(oauthEdit.getGender()))
-                .build();
     }
 }
