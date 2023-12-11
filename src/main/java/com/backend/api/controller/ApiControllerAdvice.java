@@ -1,6 +1,6 @@
 package com.backend.api.controller;
 
-import com.backend.api.exception.InvalidCourseException;
+import com.backend.api.exception.CourseNotFoundException;
 import com.backend.api.exception.InvalidUserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -23,8 +23,8 @@ public class ApiControllerAdvice {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(InvalidCourseException.class)
-    public ApiResponse<Object> handleInvalidCourseException(InvalidCourseException e) {
+    @ExceptionHandler(CourseNotFoundException.class)
+    public ApiResponse<Object> handleInvalidCourseException(CourseNotFoundException e) {
         return ApiResponse.of(
                 HttpStatus.NOT_FOUND,
                 e.getMessage(),
