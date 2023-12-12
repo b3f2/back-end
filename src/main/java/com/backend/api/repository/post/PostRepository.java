@@ -3,9 +3,20 @@ package com.backend.api.repository.post;
 import com.backend.api.entity.post.Post;
 import com.backend.api.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
+import java.awt.print.Pageable;
 import java.util.List;
-
-public interface PostRepository extends JpaRepository<Post, Long> {
+import java.util.Optional;
+@Repository
+public interface PostRepository extends JpaRepository<Post, Long>, CustomPostRepository {
     List<Post> findByUser(User user);
+    @Query("select p from Post p join fetch p.user where p.id=:id")
+    Optional<Post> findByIdWithUser(Long id);
+
+    Optional<Post> findPostByUser(User user);
+
+//    Optional<Post> findByTitleContaining(String keyword, Pageable pageable);
 }
