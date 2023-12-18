@@ -123,8 +123,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         //expected
         mockMvc.perform(get("/api/courses/{id}", 1))
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"));
 
     }
 
@@ -246,8 +246,8 @@ public class CourseControllerTest extends ControllerTestSupport {
                         .content(json)
                 )
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.message").value("해당 코스가 없습니다."))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
@@ -330,8 +330,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         mockMvc.perform(delete("/api/courses/{id}", 1L)
                 )
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.message").value("해당 코스가 없습니다."));
     }
 }

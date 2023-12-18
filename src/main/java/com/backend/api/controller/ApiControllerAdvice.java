@@ -21,11 +21,11 @@ public class ApiControllerAdvice {
         );
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CourseNotFoundException.class)
     public ApiResponse<Object> handleInvalidCourseException(CourseNotFoundException e) {
         return ApiResponse.of(
-                HttpStatus.NOT_FOUND,
+                HttpStatus.BAD_REQUEST,
                 e.getMessage(),
                 null
         );
