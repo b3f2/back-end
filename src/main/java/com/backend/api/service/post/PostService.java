@@ -4,7 +4,7 @@ import com.backend.api.dto.post.*;
 import com.backend.api.entity.post.*;
 import com.backend.api.entity.user.User;
 import com.backend.api.exception.*;
-import com.backend.api.repository.comment.CommentRepository;
+import com.backend.api.repository.post.CommentRepository;
 import com.backend.api.repository.post.CategoryRepository;
 import com.backend.api.repository.post.ImageRepository;
 import com.backend.api.repository.post.PostLikeRepository;
@@ -16,11 +16,8 @@ import com.backend.api.response.comment.CommentResponse;
 import com.backend.api.response.post.*;
 import com.backend.api.response.user.LoginResponse;
 import com.backend.api.service.file.AwsS3UploadService;
-import com.backend.api.service.file.FileService;
 import com.backend.api.service.file.FileUploadService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +26,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 

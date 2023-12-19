@@ -7,10 +7,8 @@ import com.backend.api.entity.post.Category;
 import com.backend.api.entity.post.Image;
 import com.backend.api.entity.post.Post;
 import com.backend.api.entity.user.Role;
-import com.backend.api.entity.user.User;
 import com.backend.api.exception.CategoryNotFoundException;
 import com.backend.api.exception.PostNotFoundException;
-import com.backend.api.exception.UnsupportedImageFormatException;
 import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.config.factory.PostCreateRequestFactory;
 import com.backend.api.request.post.PostCreateRequest;
@@ -18,7 +16,6 @@ import com.backend.api.request.post.PostUpdateRequest;
 import com.backend.api.response.post.PostDetailResponse;
 import com.backend.api.response.post.PostResponse;
 import com.backend.api.response.user.LoginResponse;
-import com.backend.api.util.Login;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,17 +31,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.backend.api.config.factory.PostCreateRequestFactory.createPostCreateRequest;
-import static com.backend.api.config.factory.PostCreateRequestFactory.createPostCreateRequestWithImages;
-import static com.backend.api.config.factory.PostFactory.createPost;
-import static com.backend.api.config.factory.PostFactory.createPostWithImages;
 import static com.backend.api.config.factory.PostUpdateRequestFactory.createPostUpdateRequest;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest extends ServiceTestSupport {
@@ -283,7 +274,6 @@ public class PostServiceTest extends ServiceTestSupport {
         postService.create(loginResponse, req, images);
 
         Post post = postRepository.findAll().get(0);
-        User user = userRepository.findByEmail(loginResponse.getEmail()).orElseThrow(UserNotFoundException::new);
 
         String result = postService.likePost(post.getId(), loginResponse);
         //when

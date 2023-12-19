@@ -1,11 +1,7 @@
 package com.backend.api;
 
 import com.backend.api.jwt.TokenProvider;
-import com.backend.api.repository.comment.CommentRepository;
-import com.backend.api.repository.post.CategoryRepository;
-import com.backend.api.repository.post.ImageRepository;
-import com.backend.api.repository.post.PostLikeRepository;
-import com.backend.api.repository.post.PostRepository;
+import com.backend.api.repository.post.*;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.course.CourseReviewRepository;
 import com.backend.api.repository.user.UserRepository;
@@ -13,6 +9,7 @@ import com.backend.api.service.auth.AuthService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
 import com.backend.api.service.file.FileService;
+import com.backend.api.service.Comment.CommentService;
 import com.backend.api.service.post.PostService;
 import com.backend.api.service.user.UserService;
 import org.mockito.Mock;
@@ -43,7 +40,7 @@ public abstract class ServiceTestSupport {
     protected PostService postService;
 
     @Autowired
-    protected PostRepository postRepository;;
+    protected PostRepository postRepository;
 
     @Autowired
     protected CategoryRepository categoryRepository;
@@ -74,4 +71,10 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected CourseReviewRepository courseReviewRepository;
+
+    @Autowired
+    protected CommentService commentService;
+
+    @Autowired
+    protected CommentLikeRepository commentLikeRepository;
 }
