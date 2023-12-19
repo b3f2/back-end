@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>, CustomPostRepository {
@@ -17,6 +16,8 @@ public interface PostRepository extends JpaRepository<Post, Long>, CustomPostRep
     Optional<Post> findByIdWithUser(Long id);
 
     Optional<Post> findPostByUser(User user);
+
+    List<Post> findByUser(User user);
 
 //    Optional<Post> findByTitleContaining(String keyword, Pageable pageable);
 }
