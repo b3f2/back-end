@@ -283,7 +283,6 @@ public class PostServiceTest extends ServiceTestSupport {
         postService.create(loginResponse, req, images);
 
         Post post = postRepository.findAll().get(0);
-        User user = userRepository.findByEmail(loginResponse.getEmail()).orElseThrow(UserNotFoundException::new);
 
         String result = postService.likePost(post.getId(), loginResponse);
         //when

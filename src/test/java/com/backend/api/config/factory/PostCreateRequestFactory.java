@@ -18,7 +18,6 @@ public class PostCreateRequestFactory {
         ));
     }
 
-
     public static PostCreateRequest createPostCreateRequest(String title, String content, Long categoryId, Long userId, List<MultipartFile> images) {
         return new PostCreateRequest(title, content, categoryId, userId, images);
     }
