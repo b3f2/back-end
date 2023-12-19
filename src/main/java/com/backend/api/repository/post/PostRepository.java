@@ -3,6 +3,7 @@ package com.backend.api.repository.post;
 import com.backend.api.entity.post.Post;
 import com.backend.api.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
