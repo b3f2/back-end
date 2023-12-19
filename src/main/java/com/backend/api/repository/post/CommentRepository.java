@@ -15,6 +15,7 @@ import java.util.Optional;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findAllByPost(Post postId);
+    List<Comment> findByUser(User user);
 
     @Override
     void deleteById(Long commentid);
