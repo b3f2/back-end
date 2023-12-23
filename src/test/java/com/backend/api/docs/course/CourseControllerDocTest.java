@@ -162,7 +162,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                 ));
 
         //expected
-        mockMvc.perform(get("/api/users/{userId}/courses", 1L)
+        mockMvc.perform(get("/api/user/{userId}/courses", 1L)
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
