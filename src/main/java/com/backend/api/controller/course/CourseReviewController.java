@@ -56,7 +56,7 @@ public class CourseReviewController {
     }
 
     //코스 리뷰 가져오기(사용자 id로)
-    @GetMapping("/users/{userId}/course-review")
+    @GetMapping("/user/{userId}/course-review")
     public ApiResponse<List<CourseReviewResponse>> getCourseReviewByUserId(@PathVariable Long userId) {
         return ApiResponse.ok(courseReviewService.getCourseReviewByUserId(userId));
     }

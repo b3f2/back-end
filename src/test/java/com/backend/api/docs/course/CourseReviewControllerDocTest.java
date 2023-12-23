@@ -189,7 +189,7 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                                 .build()));
 
         //expected
-        mockMvc.perform(get("/api/users/{userId}/course-review", 1L)
+        mockMvc.perform(get("/api/user/{userId}/course-review", 1L)
                         .accept(MediaType.APPLICATION_JSON)
                         .characterEncoding("UTF-8"))
                 .andDo(print())
