@@ -19,30 +19,6 @@ include::{snippets}/user-signup/request-fields.adoc[]
 include::{snippets}/user-signup/http-response.adoc[]
 include::{snippets}/user-signup/response-fields.adoc[]
 
-=== 로그인
-
-==== Http Request
-include::{snippets}/auth-login/http-request.adoc[]
-include::{snippets}/auth-login/request-fields.adoc[]
-
-==== Http Response
-include::{snippets}/auth-login/http-response.adoc[]
-include::{snippets}/auth-login/response-fields.adoc[]
-
-=== 로그아웃
-include::{snippets}/auth-logout/http-request.adoc[]
-include::{snippets}/auth-logout/request-fields.adoc[]
-
-include::{snippets}/auth-logout/http-response.adoc[]
-include::{snippets}/auth-logout/response-fields.adoc[]
-
-=== Refresh Token 재발급
-include::{snippets}/auth-reissue/http-request.adoc[]
-include::{snippets}/auth-reissue/request-fields.adoc[]
-
-include::{snippets}/auth-reissue/http-response.adoc[]
-include::{snippets}/auth-reissue/response-fields.adoc[]
-
 === 회원 정보 조회
 
 ==== Http Request
