@@ -68,6 +68,8 @@ public class Oauth2TokenHandler implements AuthenticationSuccessHandler {
         // 처음 소셜 로그인으로 접속 시 추가정보 기입을 위해 HTTP 상태메세지를 남김
         if (user.getAddress() == null) {
             response.sendRedirect("/api/oauth2");
+        } else {
+            response.sendRedirect("/apu/oauth2/ok");
         }
     }
 

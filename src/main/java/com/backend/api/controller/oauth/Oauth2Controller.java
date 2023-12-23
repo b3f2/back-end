@@ -26,6 +26,14 @@ public class Oauth2Controller {
                 .build();
     }
 
+    @GetMapping("/oauth2/ok")
+    public ApiResponse oauth2Ok() {
+        return ApiResponse.builder()
+                .message("소셜 로그인 성공")
+                .status(OK)
+                .build();
+    }
+
     @PatchMapping("/addInformation")
     public ApiResponse addInformation(@Login LoginResponse response,@RequestBody OauthEdit oauthEdit) {
         oauthService.addInformation(response, oauthEdit);
