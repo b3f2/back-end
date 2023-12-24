@@ -7,11 +7,13 @@ import com.backend.api.repository.course.CourseReviewRepository;
 import com.backend.api.repository.local.FavoriteLocalRepository;
 import com.backend.api.repository.local.FavoritesRepository;
 import com.backend.api.repository.local.LocalRepository;
+import com.backend.api.repository.local.LocalReviewRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
 import com.backend.api.service.local.FavoriteService;
+import com.backend.api.service.local.LocalReviewService;
 import com.backend.api.service.local.LocalService;
 import com.backend.api.service.file.FileService;
 import com.backend.api.service.Comment.CommentService;
@@ -88,6 +90,12 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected LocalRepository localRepository;
+
+    @Autowired
+    protected LocalReviewService localReviewService;
+
+    @Autowired
+    protected LocalReviewRepository localReviewRepository;
 
     @Autowired
     protected FavoriteService favoriteService;
