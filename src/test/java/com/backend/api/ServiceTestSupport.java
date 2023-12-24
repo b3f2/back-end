@@ -4,10 +4,15 @@ import com.backend.api.jwt.TokenProvider;
 import com.backend.api.repository.post.*;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.course.CourseReviewRepository;
+import com.backend.api.repository.local.FavoriteLocalRepository;
+import com.backend.api.repository.local.FavoritesRepository;
+import com.backend.api.repository.local.LocalRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
+import com.backend.api.service.local.FavoriteService;
+import com.backend.api.service.local.LocalService;
 import com.backend.api.service.file.FileService;
 import com.backend.api.service.Comment.CommentService;
 import com.backend.api.service.post.PostService;
@@ -77,4 +82,19 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected CommentLikeRepository commentLikeRepository;
+
+    @Autowired
+    protected LocalService localService;
+
+    @Autowired
+    protected LocalRepository localRepository;
+
+    @Autowired
+    protected FavoriteService favoriteService;
+
+    @Autowired
+    protected FavoritesRepository favoritesRepository;
+
+    @Autowired
+    protected FavoriteLocalRepository favoriteLocalRepository;
 }
