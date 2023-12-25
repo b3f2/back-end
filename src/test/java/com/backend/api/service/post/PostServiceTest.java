@@ -19,8 +19,6 @@ import com.backend.api.response.user.LoginResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
@@ -37,7 +35,6 @@ import static com.backend.api.config.factory.PostUpdateRequestFactory.createPost
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
 public class PostServiceTest extends ServiceTestSupport {
 
     private final static String PROCESS_LIKE_POST = "좋아요 처리 완료";
@@ -57,8 +54,9 @@ public class PostServiceTest extends ServiceTestSupport {
     void createTest() throws IOException {
         // given
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -67,6 +65,28 @@ public class PostServiceTest extends ServiceTestSupport {
 
         // when
         postService.create(loginResponse, req, images);
+
+        // then
+        Post post = postRepository.findAll().get(0);
+        assertThat(post.getTitle()).isEqualTo("title");
+        assertThat(post.getContent()).isEqualTo("content");
+        assertThat(post.getImages()).isNotNull();
+    }
+
+    @Test
+    @WithMockCustomUser
+    void createWithoutPictureTest() throws IOException {
+        // given
+        PostCreateRequest req = createPostCreateRequest();
+        categoryRepository.save(Category.builder()
+                .name("cat")
+                        .id(1L)
+                .build());
+
+        LoginResponse loginResponse = createLogin();
+
+        // when
+        postService.create(loginResponse, req, List.of());
 
         // then
         Post post = postRepository.findAll().get(0);
@@ -102,8 +122,9 @@ public class PostServiceTest extends ServiceTestSupport {
         //given
 
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -133,6 +154,7 @@ public class PostServiceTest extends ServiceTestSupport {
         //given
         Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -157,8 +179,9 @@ public class PostServiceTest extends ServiceTestSupport {
     void deleteTest() throws IOException {
         //given
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -190,8 +213,9 @@ public class PostServiceTest extends ServiceTestSupport {
         //given
         List<MultipartFile> images = createImages();
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
         LoginResponse loginResponse = createLogin();
         postService.create(loginResponse, req, images);
@@ -242,8 +266,9 @@ public class PostServiceTest extends ServiceTestSupport {
     void likePostTest() throws Exception{
         //given
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -265,8 +290,9 @@ public class PostServiceTest extends ServiceTestSupport {
     void unlikePostTest() throws Exception {
         // given
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -285,7 +311,7 @@ public class PostServiceTest extends ServiceTestSupport {
 
     private LoginResponse createLogin() {
         return LoginResponse.builder()
-                .email("userTest@gmail.com")
+                .email("user@gmail.com")
                 .role(Role.ROLE_USER)
                 .build();
     }
