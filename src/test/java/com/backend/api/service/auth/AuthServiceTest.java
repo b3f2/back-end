@@ -31,7 +31,7 @@ class AuthServiceTest extends ServiceTestSupport {
         userRepository.save(user);
 
         LoginRequest request = LoginRequest.builder()
-                .email("user@gmail.com")
+                .email("user1@gmail.com")
                 .password("1111")
                 .build();
 
@@ -54,7 +54,7 @@ class AuthServiceTest extends ServiceTestSupport {
         userRepository.save(user);
 
         LoginRequest request = LoginRequest.builder()
-                .email("user@naver.com")
+                .email("user2@gmail.com")
                 .password("1111")
                 .build();
 
@@ -74,7 +74,7 @@ class AuthServiceTest extends ServiceTestSupport {
         userRepository.save(user);
 
         LoginRequest request = LoginRequest.builder()
-                .email("user@gmail.com")
+                .email("user1@gmail.com")
                 .password("1234")
                 .build();
 
@@ -87,7 +87,7 @@ class AuthServiceTest extends ServiceTestSupport {
 
     private User userCreate() {
         return User.builder()
-                .email("user@gmail.com")
+                .email("user1@gmail.com")
                 .password(passwordEncoder.encode("1111"))
                 .nickName("user")
                 .address(Address.builder()
