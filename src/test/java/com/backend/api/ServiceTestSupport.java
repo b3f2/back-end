@@ -12,7 +12,6 @@ import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
-import com.backend.api.service.file.FileService;
 import com.backend.api.service.Comment.CommentService;
 import com.backend.api.service.post.PostService;
 import com.backend.api.service.Comment.CommentService;
@@ -53,9 +52,6 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected CategoryRepository categoryRepository;
-
-    @Autowired
-    protected FileService fileService;
 
     @Autowired
     protected PostLikeRepository postLikeRepository;
