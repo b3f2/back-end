@@ -17,6 +17,7 @@ import java.util.UUID;
 
 
 public interface FileService {
+
     void upload(MultipartFile file, String fileName);
     void delete(String fileName);
 }

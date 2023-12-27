@@ -12,6 +12,9 @@ import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
+import com.backend.api.service.file.FileService;
+import com.backend.api.service.Comment.CommentService;
+import com.backend.api.service.post.PostService;
 import com.backend.api.service.Comment.CommentService;
 import com.backend.api.service.post.PostService;
 import com.backend.api.service.local.FavoriteService;
@@ -46,10 +49,13 @@ public abstract class ServiceTestSupport {
     protected PostService postService;
 
     @Autowired
-    protected PostRepository postRepository;;
+    protected PostRepository postRepository;
 
     @Autowired
     protected CategoryRepository categoryRepository;
+
+    @Autowired
+    protected FileService fileService;
 
     @Autowired
     protected PostLikeRepository postLikeRepository;

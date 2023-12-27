@@ -46,6 +46,13 @@ public abstract class ControllerTestSupport {
 
 
     @Autowired
+    protected PostRepository postRepository;
+
+    @Autowired
+    protected CategoryRepository categoryRepository;
+
+
+    @Autowired
     protected LocalRepository localRepository;
 
     @Autowired
@@ -56,11 +63,4 @@ public abstract class ControllerTestSupport {
 
     @Autowired
     protected FavoriteLocalRepository favoriteLocalRepository;
-    @Autowired
-    protected PostRepository postRepository;
-
-    @Autowired
-    protected CategoryRepository categoryRepository;
-
-
 }

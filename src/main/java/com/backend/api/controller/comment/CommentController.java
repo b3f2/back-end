@@ -1,7 +1,6 @@
 package com.backend.api.controller.comment;
 
 import com.backend.api.controller.ApiResponse;
-import com.backend.api.entity.post.Comment;
 import com.backend.api.request.comment.CommentCreateRequest;
 import com.backend.api.request.comment.CommentReadRequest;
 import com.backend.api.request.comment.CommentUpdateRequest;
