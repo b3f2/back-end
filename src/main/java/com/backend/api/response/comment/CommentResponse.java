@@ -1,18 +1,13 @@
 package com.backend.api.response.comment;
 
-import com.backend.api.dto.post.UserDto;
 import com.backend.api.entity.post.Comment;
-import com.backend.api.entity.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
