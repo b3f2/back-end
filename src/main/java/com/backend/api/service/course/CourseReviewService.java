@@ -3,8 +3,8 @@ package com.backend.api.service.course;
 import com.backend.api.entity.course.Course;
 import com.backend.api.entity.course.CourseReview;
 import com.backend.api.entity.user.User;
+import com.backend.api.exception.CourseNotFoundException;
 import com.backend.api.exception.CourseReviewNotFoundException;
-import com.backend.api.exception.InvalidCourseException;
 import com.backend.api.exception.InvalidUserException;
 import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.repository.course.CourseRepository;
@@ -35,7 +35,7 @@ public class CourseReviewService {
                 .orElseThrow(UserNotFoundException::new);
 
         Course course = courseRepository.findById(createCourseReview.getCourseId())
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         CourseReview courseReview = CourseReview.builder()
                 .content(createCourseReview.getContent())
@@ -60,7 +60,7 @@ public class CourseReviewService {
     @Transactional
     public CourseReviewResponse updateCourseReview(LoginResponse loginResponse, Long id, UpdateCourseReview updateCourseReview) {
         Course course = courseRepository.findById(updateCourseReview.getCourseId())
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         if (!course.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();

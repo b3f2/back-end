@@ -2,7 +2,7 @@ package com.backend.api.service.course;
 
 import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.User;
-import com.backend.api.exception.InvalidCourseException;
+import com.backend.api.exception.CourseNotFoundException;
 import com.backend.api.exception.InvalidUserException;
 import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.repository.course.CourseRepository;
@@ -42,7 +42,7 @@ public class CourseService {
     @Transactional
     public CourseResponse updateCourse(LoginResponse loginResponse, Long id, UpdateCourse updateCourse) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
@@ -56,7 +56,7 @@ public class CourseService {
     @Transactional
     public void deleteCourse(LoginResponse loginResponse, Long id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
@@ -67,7 +67,7 @@ public class CourseService {
 
     public CourseResponse getCourse(Long id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         return CourseResponse.builder()
                 .name(course.getName())

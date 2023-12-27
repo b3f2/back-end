@@ -5,7 +5,7 @@ import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.Gender;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
-import com.backend.api.exception.InvalidCourseException;
+import com.backend.api.exception.CourseNotFoundException;
 import com.backend.api.request.course.CreateCourse;
 import com.backend.api.request.course.UpdateCourse;
 import com.backend.api.response.course.CourseResponse;
@@ -139,7 +139,7 @@ class CourseServiceTest extends ServiceTestSupport {
 
         //then
         Course updatedCourse = courseRepository.findById(course.getId())
-                .orElseThrow(InvalidCourseException::new);
+                .orElseThrow(CourseNotFoundException::new);
 
         assertEquals(1, courseRepository.count());
         assertEquals("코스 2", courseRepository.findAll().get(0).getName());

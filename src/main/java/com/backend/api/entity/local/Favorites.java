@@ -1,12 +1,22 @@
 package com.backend.api.entity.local;
 
 import com.backend.api.entity.user.User;
+import com.backend.api.entity.util.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
-public class Favorites {
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Favorites extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +27,16 @@ public class Favorites {
     @ManyToOne(fetch = LAZY)
     private User user;
 
-    @ManyToOne(fetch = LAZY)
-    private Local local;
+    @OneToMany(mappedBy = "favorites", fetch = LAZY)
+    private List<FavoriteLocal> favoriteLocals = new ArrayList<>();
 
+    @Builder
+    public Favorites(String name, User user){
+        this.name = name;
+        this.user = user;
+    }
+
+    public void updateName(String name){
+        this.name = name;
+    }
 }
