@@ -41,7 +41,7 @@ class UserControllerTest extends ControllerTestSupport {
     public void test1() throws Exception {
         // given
         JoinRequest request = JoinRequest.builder()
-                .email("user1@gmail.com")
+                .email("user@gmail.com")
                 .password("userpassword")
                 .nickName("user")
                 .city("서울시")
