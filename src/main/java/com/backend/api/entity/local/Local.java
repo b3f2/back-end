@@ -1,8 +1,8 @@
 package com.backend.api.entity.local;
 
+import com.backend.api.entity.course.CourseLocal;
 import com.backend.api.entity.user.User;
 import com.backend.api.entity.util.Address;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -29,9 +29,11 @@ public class Local {
 
     private String y;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "local", fetch = LAZY)
     private List<FavoriteLocal> favoriteLocals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "local", fetch = LAZY)
+    private List<CourseLocal> courseLocals = new ArrayList<>();
 
     @Embedded
     private Address address;
