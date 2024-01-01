@@ -49,7 +49,7 @@ class AuthControllerTest {
         userRepository.save(userCreate());
 
         LoginRequest request = LoginRequest.builder()
-                .email("user@gmail.com")
+                .email("userTest@gmail.com")
                 .password("1111")
                 .build();
 
@@ -73,7 +73,7 @@ class AuthControllerTest {
         // given
         userRepository.save(userCreate());
         LoginRequest request = LoginRequest.builder()
-                .email("user@gmail.com")
+                .email("userTest@gmail.com")
                 .password("1111")
                 .build();
 
@@ -96,7 +96,7 @@ class AuthControllerTest {
         // given
         userRepository.save(userCreate());
         LoginRequest request = LoginRequest.builder()
-                .email("user@gmail.com")
+                .email("userTest@gmail.com")
                 .password("1111")
                 .build();
 
@@ -114,7 +114,7 @@ class AuthControllerTest {
 
     private User userCreate() {
         return User.builder()
-                .email("user@gmail.com")
+                .email("userTest@gmail.com")
                 .password(passwordEncoder.encode("1111"))
                 .nickName("user")
                 .address(Address.builder()
