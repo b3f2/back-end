@@ -77,21 +77,29 @@ public class LocalControllerDocTest extends RestDocsSupport {
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("장소 저장 이름"),
+                                        .description("장소 저장 이름")
+                                        .optional(),
                                 fieldWithPath("x").type(JsonFieldType.STRING)
-                                        .description("x 좌표"),
+                                        .description("x 좌표")
+                                        .optional(),
                                 fieldWithPath("y").type(JsonFieldType.STRING)
-                                        .description("y 좌표"),
+                                        .description("y 좌표")
+                                        .optional(),
                                 fieldWithPath("address").type(JsonFieldType.OBJECT)
-                                        .description("주소"),
+                                        .description("주소")
+                                        .optional(),
                                 fieldWithPath("address.city").type(JsonFieldType.STRING)
-                                        .description("시군구"),
+                                        .description("시군구")
+                                        .optional(),
                                 fieldWithPath("address.street").type(JsonFieldType.STRING)
-                                        .description("도로명 주소"),
+                                        .description("도로명 주소")
+                                        .optional(),
                                 fieldWithPath("address.zipcode").type(JsonFieldType.STRING)
-                                        .description("동호수"),
+                                        .description("동호수")
+                                        .optional(),
                                 fieldWithPath("areaCategory").type(JsonFieldType.STRING)
-                                        .description("장소 카테고리")),
+                                        .description("장소 카테고리")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),

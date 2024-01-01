@@ -62,11 +62,14 @@ public class LocalReviewControllerDocTest extends RestDocsSupport {
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING)
-                                        .description("장소 리뷰 내용"),
+                                        .description("장소 리뷰 내용")
+                                        .optional(),
                                 fieldWithPath("rating").type(JsonFieldType.NUMBER)
-                                        .description("평점"),
+                                        .description("평점")
+                                        .optional(),
                                 fieldWithPath("localId").type(JsonFieldType.NUMBER)
-                                        .description("장소 아이디")),
+                                        .description("장소 아이디")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
