@@ -368,4 +368,54 @@ class FavoriteServiceTest extends ServiceTestSupport {
         assertEquals("햄버거 맛집", favoriteLocalRepository.findAll().get(0).getLocal().getName());
         assertEquals(2L, favoritesRepository.findAll().get(0).getFavoriteLocals().size());
     }
+
+    @Test
+    @DisplayName("폴더 안에 장소 두개 넣고 폴더를 삭제하기")
+    @Transactional
+    void DeleteFavoriteWithFavoriteLocal() throws Exception {
+        //given
+        User user = userCreate();
+        userRepository.save(user);
+
+        Favorites favorites = Favorites.builder()
+                .name("상일동 맛집")
+                .user(user)
+                .build();
+        favoritesRepository.save(favorites);
+
+        Local local = localCreate(user);
+        localRepository.save(local);
+
+        Local local2 = Local.builder()
+                .x(String.valueOf(37.8999))
+                .y(String.valueOf(126.9000))
+                .address(Address.builder()
+                        .city("서울시")
+                        .street("천호대로 1234길")
+                        .zipcode("405동 607호")
+                        .build())
+                .areaCategory(AreaCategory.RESTAURANT)
+                .name("햄버거 맛집")
+                .user(user)
+                .build();
+        localRepository.save(local2);
+
+        favoriteLocalRepository.save(FavoriteLocal.builder()
+                .favorites(favorites)
+                .local(local)
+                .build());
+
+        favoriteLocalRepository.save(FavoriteLocal.builder()
+                .favorites(favorites)
+                .local(local2)
+                .build());
+
+        //when
+        favoriteService.deleteFavorite(loginCreate(user), favorites.getId());
+
+        //then
+        assertEquals(0, favoriteLocalRepository.count());
+        assertEquals(2L, localRepository.count());
+        assertEquals(0, favoritesRepository.count());
+    }
 }
