@@ -100,6 +100,9 @@ public class FavoriteService {
             throw new InvalidUserException();
         }
 
+        List<FavoriteLocal> byFavoritesId = favoriteLocalRepository.findByFavoritesId(id);
+        favoriteLocalRepository.deleteAll(byFavoritesId);
+
         favoritesRepository.deleteById(id);
     }
 

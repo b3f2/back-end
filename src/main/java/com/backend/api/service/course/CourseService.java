@@ -1,10 +1,12 @@
 package com.backend.api.service.course;
 
 import com.backend.api.entity.course.Course;
+import com.backend.api.entity.course.CourseLocal;
 import com.backend.api.entity.user.User;
 import com.backend.api.exception.CourseNotFoundException;
 import com.backend.api.exception.InvalidUserException;
 import com.backend.api.exception.UserNotFoundException;
+import com.backend.api.repository.course.CourseLocalRepository;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.request.course.CreateCourse;
@@ -24,7 +26,7 @@ public class CourseService {
 
     private final UserRepository userRepository;
     private final CourseRepository courseRepository;
-
+    private final CourseLocalRepository courseLocalRepository;
 
     @Transactional
     public CourseResponse createCourse(CreateCourse createCourse, LoginResponse loginResponse) {
@@ -61,6 +63,9 @@ public class CourseService {
         if(!course.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
         }
+
+        List<CourseLocal> byCourseId = courseLocalRepository.findByCourseId(id);
+        courseLocalRepository.deleteAll(byCourseId);
 
         courseRepository.deleteById(id);
     }

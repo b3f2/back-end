@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -24,6 +27,9 @@ public class Course {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "course", fetch = LAZY)
+    private List<CourseLocal> courseLocals = new ArrayList<>();
 
     @Builder
     public Course(String name, User user) {
