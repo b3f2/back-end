@@ -67,7 +67,8 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("즐겨찾기 폴더 이름")),
+                                        .description("즐겨찾기 폴더 이름")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -113,7 +114,8 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                                 parameterWithName("favoriteId").description("폴더 ID")),
                         requestFields(
                                 fieldWithPath("localId").type(JsonFieldType.NUMBER)
-                                        .description("장소 ID")),
+                                        .description("장소 ID")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -214,7 +216,8 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                                 parameterWithName("favoriteId").description("폴더 ID")),
                         requestFields(
                                 fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("폴더 이름")),
+                                        .description("폴더 이름")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),

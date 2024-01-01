@@ -59,7 +59,8 @@ class CourseControllerDocTest extends RestDocsSupport {
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("코스 이름")),
+                                        .description("코스 이름")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -191,11 +192,11 @@ class CourseControllerDocTest extends RestDocsSupport {
     void updateUserCourse() throws Exception {
         given(courseService.updateCourse(any(LoginResponse.class), any(Long.class), any(UpdateCourse.class)))
                 .willReturn(CourseResponse.builder()
-                        .name("편집된 코스")
+                        .name("변경된 코스 이름")
                         .build());
 
         UpdateCourse updateCourse = UpdateCourse.builder()
-                .name("코스 1")
+                .name("변경된 코스 이름")
                 .build();
 
         //expected
@@ -212,7 +213,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                                 parameterWithName("id").description("코스 ID")),
                         requestFields(
                                 fieldWithPath("name").type(JsonFieldType.STRING)
-                                        .description("코스 이름")),
+                                        .description("변경할 코스 이름").optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -223,7 +224,7 @@ class CourseControllerDocTest extends RestDocsSupport {
                                 fieldWithPath("data").type(JsonFieldType.OBJECT)
                                         .description("응답 데이터"),
                                 fieldWithPath("data.name").type(JsonFieldType.STRING)
-                                        .description("수정된 코스"))));
+                                        .description("변경된 코스 이름"))));
     }
 
     @Test
