@@ -54,7 +54,7 @@ jobs:
 
       # Gradle Build
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build -i
 
       # Docker Build하고 DockerHub에 Push
       - name: Docker Build & Push to DockerHub
