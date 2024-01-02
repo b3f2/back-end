@@ -80,7 +80,7 @@ public class PostServiceTest extends ServiceTestSupport {
         PostCreateRequest req = createPostCreateRequest();
         categoryRepository.save(Category.builder()
                 .name("cat")
-                        .id(1L)
+                .id(1L)
                 .build());
 
         LoginResponse loginResponse = createLogin();
@@ -122,7 +122,7 @@ public class PostServiceTest extends ServiceTestSupport {
         //given
 
         PostCreateRequest req = createPostCreateRequest();
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
@@ -152,7 +152,7 @@ public class PostServiceTest extends ServiceTestSupport {
     @WithMockCustomUser
     void readAllTest() throws IOException {
         //given
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
@@ -179,7 +179,7 @@ public class PostServiceTest extends ServiceTestSupport {
     void deleteTest() throws IOException {
         //given
         PostCreateRequest req = createPostCreateRequest();
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
@@ -213,7 +213,7 @@ public class PostServiceTest extends ServiceTestSupport {
         //given
         List<MultipartFile> images = createImages();
         PostCreateRequest req = createPostCreateRequest();
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
@@ -266,7 +266,7 @@ public class PostServiceTest extends ServiceTestSupport {
     void likePostTest() throws Exception{
         //given
         PostCreateRequest req = createPostCreateRequest();
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
@@ -290,7 +290,7 @@ public class PostServiceTest extends ServiceTestSupport {
     void unlikePostTest() throws Exception {
         // given
         PostCreateRequest req = createPostCreateRequest();
-        Category category = categoryRepository.save(Category.builder()
+        categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
