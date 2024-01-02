@@ -44,14 +44,6 @@ public abstract class ControllerTestSupport {
     @Autowired
     protected CategoryRepository categoryRepository;
 
-
-    @Autowired
-    protected PostRepository postRepository;
-
-    @Autowired
-    protected CategoryRepository categoryRepository;
-
-
     @Autowired
     protected LocalRepository localRepository;
 
