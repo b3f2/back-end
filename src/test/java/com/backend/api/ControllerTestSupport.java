@@ -56,4 +56,11 @@ public abstract class ControllerTestSupport {
     protected CategoryRepository categoryRepository;
 
 
+    @Autowired
+    protected PostRepository postRepository;
+
+    @Autowired
+    protected CategoryRepository categoryRepository;
+
+
 }

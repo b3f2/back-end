@@ -17,6 +17,8 @@ import com.backend.api.service.post.PostService;
 import com.backend.api.service.local.FavoriteService;
 import com.backend.api.service.local.LocalReviewService;
 import com.backend.api.service.local.LocalService;
+import com.backend.api.service.Comment.CommentService;
+import com.backend.api.service.post.PostService;
 import com.backend.api.service.user.UserService;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +97,12 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected FavoriteLocalRepository favoriteLocalRepository;
+
+    @Autowired
+    protected CommentService commentService;
+
+    @Autowired
+    protected CommentLikeRepository commentLikeRepository;
 
     @Autowired
     protected CommentService commentService;

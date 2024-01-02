@@ -266,7 +266,7 @@ public class PostServiceTest extends ServiceTestSupport {
     void likePostTest() throws Exception{
         //given
         PostCreateRequest req = createPostCreateRequest();
-        categoryRepository.save(Category.builder()
+        Category category = categoryRepository.save(Category.builder()
                 .name("cat")
                 .id(1L)
                 .build());
