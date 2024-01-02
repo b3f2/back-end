@@ -29,10 +29,8 @@ class UserServiceTest extends ServiceTestSupport {
         authService = new AuthService(tokenProvider, passwordEncoder, userRepository);
     }
 
-
     @AfterEach
     void tearDown() {
-        courseRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
     }
 
