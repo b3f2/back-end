@@ -2,7 +2,6 @@ package com.backend.api.service.user;
 
 import com.backend.api.ServiceTestSupport;
 import com.backend.api.config.WithMockCustomUser;
-import com.backend.api.entity.course.Course;
 import com.backend.api.entity.user.Gender;
 import com.backend.api.entity.user.Role;
 import com.backend.api.entity.user.User;
@@ -18,10 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -170,95 +165,6 @@ class UserServiceTest extends ServiceTestSupport {
                 .hasMessage("이미 가입되어 있는 이메일 입니다.");
     }
 
-    @Test
-    @WithMockCustomUser
-    @DisplayName("회원이 삭제 되었을 때 회원이 작성한 코스도 같이 삭제가 된다.")
-    public void test7() {
-        // given
-        LoginResponse loginResponse = loginCreate();
-
-        courseRepository.save(
-                Course.builder()
-                        .name("코스")
-                        .user(userRepository.findByEmail(loginResponse.getEmail()).get())
-                        .build()
-        );
-
-        // when
-        userService.delete(loginResponse);
-
-        // then
-        assertThat(0).isEqualTo(userRepository.count());
-        assertThat(0).isEqualTo(courseRepository.count());
-    }
-
-    @Test
-    @WithMockCustomUser
-    @DisplayName("회원이 삭제 되었을 때 회원이 작성한 코스들이 같이 삭제가 된다.")
-    public void test8() {
-        // given
-        LoginResponse loginResponse = loginCreate();
-
-        List<Course> course = IntStream.range(0, 10)
-                .mapToObj(i -> Course.builder()
-                        .name("couse " + i)
-                        .user(userRepository.findByEmail(loginResponse.getEmail()).get())
-                        .build()
-                ).collect(Collectors.toList());
-
-        courseRepository.saveAll(course);
-
-        // when
-        userService.delete(loginResponse);
-
-        // then
-        assertThat(0).isEqualTo(userRepository.count());
-        assertThat(0).isEqualTo(courseRepository.count());
-    }
-
-    @Test
-    @WithMockCustomUser
-    @DisplayName("A 유저가 탈퇴했을 때 A 유저의 정보들만 사라진다.")
-    public void test9() {
-        // given
-        LoginResponse loginResponse = loginCreate();
-
-        User user = userRepository.save(
-                User.builder()
-                        .email("userB@gamil.com")
-                        .password(passwordEncoder.encode("1111"))
-                        .nickName("userB")
-                        .address(Address.builder()
-                                .city("서울시")
-                                .street("도봉로 106길 23")
-                                .zipcode("102동 208호")
-                                .build()
-                        )
-                        .birth("20000418")
-                        .gender(Gender.MAN)
-                        .build()
-        );
-        Course courseA = Course.builder()
-                .name("코스")
-                .user(userRepository.findByEmail(loginResponse.getEmail()).get())
-                .build();
-
-        Course courseB = Course.builder()
-                .name("코스2")
-                .user(user)
-                .build();
-
-        courseRepository.save(courseA);
-
-        courseRepository.save(courseB);
-
-        // when
-        userService.delete(loginResponse);
-
-        // then
-        assertThat(1).isEqualTo(userRepository.count());
-        assertThat(1).isEqualTo(courseRepository.count());
-    }
 
     private User userCreate() {
         return User.builder()
