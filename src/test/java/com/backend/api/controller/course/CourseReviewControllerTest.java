@@ -206,7 +206,7 @@ class CourseReviewControllerTest extends ControllerTestSupport {
 
 
         //expected
-        mockMvc.perform(get("/api/users/{userId}/course-review", user.getId()))
+        mockMvc.perform(get("/api/user/{userId}/course-review", user.getId()))
                 .andDo(print())
                 .andExpect(status().isOk());
         List<CourseReview> courseReviewList = courseReviewRepository.findAll();
@@ -221,15 +221,26 @@ class CourseReviewControllerTest extends ControllerTestSupport {
     }
 
     @Test
-    @DisplayName("없는 코스 리뷰 조회")
-    void getEmptyCourseReview() throws Exception {
+    @DisplayName("없는 모든 코스 리뷰 조회")
+    void getEmptyCourseReviewList() throws Exception {
         //expected
         mockMvc.perform(get("/api/course-review"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isEmpty());
     }
-
+    @Test
+    @DisplayName("없는 코스 리뷰 단건 조회")
+    @WithMockCustomUser
+    void getEmptyCourseReview() throws Exception {
+        //expected
+        mockMvc.perform(get("/api/course-review/{id}", 1L))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
+                .andExpect(jsonPath("$.message").value("해당 코스 리뷰가 없습니다."))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
     @Test
     @DisplayName("코스 리뷰 수정")
     @WithMockCustomUser

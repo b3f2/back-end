@@ -56,7 +56,7 @@ public class CourseController {
     }
 
     //코스 목록 조회(사용자 id 값으로)
-    @GetMapping("/users/{userId}/courses")
+    @GetMapping("/user/{userId}/courses")
     public ApiResponse<List<CourseResponse>> getUserCourses(@PathVariable Long userId) {
         return ApiResponse.ok(courseService.getCoursesByUserId(userId));
     }

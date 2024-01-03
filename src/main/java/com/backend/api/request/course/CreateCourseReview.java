@@ -3,6 +3,7 @@ package com.backend.api.request.course;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -15,8 +16,10 @@ public class CreateCourseReview {
 
     @Min(value = 0, message = "0~5 사이의 숫자를 입력해 주세요")
     @Max(value = 5, message = "0~5 사이의 숫자를 입력해 주세요")
+    @NotNull(message = "평점을 입력해 주세요")
     private int rating;
 
+    @NotNull(message = "코스 Id를 입력해 주세요")
     private Long courseId;
 
     @Builder

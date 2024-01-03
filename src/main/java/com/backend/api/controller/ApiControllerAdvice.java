@@ -21,21 +21,31 @@ public class ApiControllerAdvice {
         );
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(CourseNotFoundException.class)
-    public ApiResponse<Object> handleInvalidCourseException(CourseNotFoundException e) {
-        return ApiResponse.of(
-                HttpStatus.NOT_FOUND,
-                e.getMessage(),
-                null
-        );
-    }
-
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(InvalidUserException.class)
     public ApiResponse<Object> handleInvalidUserException(InvalidUserException e) {
         return ApiResponse.of(
                 HttpStatus.UNAUTHORIZED,
+                e.getMessage(),
+                null
+        );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CourseNotFoundException.class)
+    public ApiResponse<Object> handleCourseNotFoundException(CourseNotFoundException e) {
+        return ApiResponse.of(
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                null
+        );
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CourseReviewNotFoundException.class)
+    public ApiResponse<Object> handleCourseReviewNotFoundException(CourseReviewNotFoundException e) {
+        return ApiResponse.of(
+                HttpStatus.BAD_REQUEST,
                 e.getMessage(),
                 null
         );

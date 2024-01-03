@@ -123,8 +123,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         //expected
         mockMvc.perform(get("/api/courses/{id}", 1))
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"));
 
     }
 
@@ -169,7 +169,7 @@ public class CourseControllerTest extends ControllerTestSupport {
         courseRepository.saveAll(courses);
 
         //expected
-        mockMvc.perform(get("/api/users/{userId}/courses", user.getId()))
+        mockMvc.perform(get("/api/user/{userId}/courses", user.getId()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data[0].name").value("코스 1"))
@@ -180,7 +180,7 @@ public class CourseControllerTest extends ControllerTestSupport {
     @DisplayName("없는 사용자의 코스 목록 조회")
     void getEmptyListByUserId() throws Exception {
         //expected
-        mockMvc.perform(get("/api/users/{userId}/courses", 1L))
+        mockMvc.perform(get("/api/user/{userId}/courses", 1L))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isEmpty());
@@ -246,8 +246,8 @@ public class CourseControllerTest extends ControllerTestSupport {
                         .content(json)
                 )
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.message").value("해당 코스가 없습니다."))
                 .andExpect(jsonPath("$.data").isEmpty());
     }
@@ -330,8 +330,8 @@ public class CourseControllerTest extends ControllerTestSupport {
         mockMvc.perform(delete("/api/courses/{id}", 1L)
                 )
                 .andDo(print())
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.code").value("404"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.message").value("해당 코스가 없습니다."));
     }
 }
