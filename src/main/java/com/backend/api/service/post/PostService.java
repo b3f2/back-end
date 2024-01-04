@@ -73,7 +73,7 @@ public class PostService {
         return new PostCreateResponse(save.getId());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public PostDetailResponse read(Long id) {
         Post post = postRepository.findById(id).orElseThrow(PostNotFoundException::new);
 
