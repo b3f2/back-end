@@ -119,12 +119,15 @@ public class CommentService {
         return commentLikeRespository.findByCommentAndUser(comment, user).isPresent();
     }
 
-    private String removeLikeComment(Comment comment, User user) {
+    @Transactional
+    public String removeLikeComment(Comment comment, User user) {
         CommentLike commentLike = commentLikeRespository.findByCommentAndUser(comment, user).orElseThrow(CommentLikeNotFoundException::new);
         commentLikeRespository.delete(commentLike);
         return PROCESS_UNLIKE_COMMENT;
     }
-    private void deleteChildren(List<Comment> children) {
+
+    @Transactional
+    public void deleteChildren(List<Comment> children) {
         for(Comment child : children) {
             List<Comment> grandchildren = child.getChildren();
             if(!grandchildren.isEmpty()) {

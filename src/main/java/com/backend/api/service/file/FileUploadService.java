@@ -101,7 +101,7 @@ public class FileUploadService {
         return UUID.randomUUID().toString().concat(getFileExtension(fileName));
     }
 
-    //파일 유혀성 검사 - 확장자
+    //파일 유효성 검사 - 확장자
     private String getFileExtension(String fileName) {
         ArrayList<String> fileValidate = new ArrayList<>();
         fileValidate.add(".jpg");
