@@ -35,7 +35,6 @@ public class CommentControllerTest extends ControllerTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     @DisplayName("댓글 작성")
     void createTest() throws Exception {
         //given
