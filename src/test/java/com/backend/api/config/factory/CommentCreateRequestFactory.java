@@ -10,5 +10,8 @@ public class CommentCreateRequestFactory {
     public static CommentCreateRequest createCommentCreateRequestWithParentId(Long parentId) {
         return new CommentCreateRequest("content", 1L, 1L, parentId);
     }
+    public static CommentCreateRequest createCommentCreateRequestWithParentId(Long postId, Long parentId) {
+        return new CommentCreateRequest("content", postId, 1L, parentId);
+    }
 }
 

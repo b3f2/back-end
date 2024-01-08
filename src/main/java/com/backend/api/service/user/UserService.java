@@ -13,7 +13,7 @@ import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.course.CourseReviewRepository;
 import com.backend.api.repository.local.FavoritesRepository;
 import com.backend.api.repository.local.LocalRepository;
-import com.backend.api.repository.post.CommentRepository;
+import com.backend.api.repository.comment.CommentRepository;
 import com.backend.api.repository.post.PostRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.request.user.JoinRequest;

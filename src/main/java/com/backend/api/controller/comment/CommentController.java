@@ -59,4 +59,5 @@ public class CommentController {
     public ApiResponse<String> likeComments(@PathVariable Long id, @Valid @Login LoginResponse loginResponse){
         return ApiResponse.ok(commentService.updateCommentLike(id, loginResponse));
     }
+
 }

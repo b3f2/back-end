@@ -1,4 +1,4 @@
-package com.backend.api.repository.post;
+package com.backend.api.repository.comment;
 
 import com.backend.api.entity.post.Comment;
 import com.backend.api.entity.post.CommentLike;

@@ -1,6 +1,8 @@
 package com.backend.api;
 
 import com.backend.api.jwt.TokenProvider;
+import com.backend.api.repository.comment.CommentLikeRepository;
+import com.backend.api.repository.comment.CommentRepository;
 import com.backend.api.repository.course.CourseLocalRepository;
 import com.backend.api.repository.post.*;
 import com.backend.api.repository.course.CourseRepository;
