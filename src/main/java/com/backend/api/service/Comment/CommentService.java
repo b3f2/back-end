@@ -5,8 +5,8 @@ import com.backend.api.entity.post.CommentLike;
 import com.backend.api.entity.post.Post;
 import com.backend.api.entity.user.User;
 import com.backend.api.exception.*;
-import com.backend.api.repository.post.CommentLikeRepository;
-import com.backend.api.repository.post.CommentRepository;
+import com.backend.api.repository.comment.CommentLikeRepository;
+import com.backend.api.repository.comment.CommentRepository;
 import com.backend.api.repository.post.PostRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.request.comment.CommentCreateRequest;
@@ -140,5 +140,4 @@ public class CommentService {
     private Comment loadCommentByCommentId(Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
     }
-
 }
