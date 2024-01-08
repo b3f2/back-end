@@ -62,11 +62,14 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                         preprocessResponse(prettyPrint()),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING)
-                                        .description("코스 리뷰 내용"),
+                                        .description("코스 리뷰 내용")
+                                        .optional(),
                                 fieldWithPath("rating").type(JsonFieldType.NUMBER)
-                                        .description("평점"),
+                                        .description("평점")
+                                        .optional(),
                                 fieldWithPath("courseId").type(JsonFieldType.NUMBER)
-                                        .description("코스 아이디")),
+                                        .description("코스 아이디")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),
@@ -244,11 +247,14 @@ public class CourseReviewControllerDocTest extends RestDocsSupport {
                                 parameterWithName("id").description("코스 리뷰 ID")),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING)
-                                        .description("수정 하려는 코스 리뷰 내용"),
+                                        .description("수정 하려는 코스 리뷰 내용")
+                                        .optional(),
                                 fieldWithPath("rating").type(JsonFieldType.NUMBER)
-                                        .description("수정 하려는 평점"),
+                                        .description("수정 하려는 평점")
+                                        .optional(),
                                 fieldWithPath("courseId").type(JsonFieldType.NUMBER)
-                                        .description("리뷰 남길 코스 아이디")),
+                                        .description("리뷰 남길 코스 아이디")
+                                        .optional()),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER)
                                         .description("코드"),

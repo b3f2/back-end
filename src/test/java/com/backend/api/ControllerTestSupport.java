@@ -1,5 +1,6 @@
 package com.backend.api;
 
+import com.backend.api.repository.course.CourseLocalRepository;
 import com.backend.api.repository.post.CategoryRepository;
 import com.backend.api.repository.post.PostRepository;
 import com.backend.api.repository.course.CourseRepository;
@@ -49,9 +50,13 @@ public abstract class ControllerTestSupport {
 
     @Autowired
     protected FavoriteLocalRepository favoriteLocalRepository;
+
     @Autowired
     protected PostRepository postRepository;
 
     @Autowired
     protected CategoryRepository categoryRepository;
+
+    @Autowired
+    protected CourseLocalRepository courseLocalRepository;
 }

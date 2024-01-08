@@ -29,7 +29,6 @@ public class LocalReviewService {
     private final LocalRepository localRepository;
     private final UserRepository userRepository;
 
-    //장소가 사라지면... 리뷰만 남게. 수정 삭제는 안되게
     @Transactional
     public LocalReviewResponse createLocalReview(LoginResponse loginResponse, CreateLocalReview createLocalReview) {
         User user = userRepository.findByEmail(loginResponse.getEmail())

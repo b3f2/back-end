@@ -80,7 +80,7 @@ include::{snippets}/user-delete/response-fields.adoc[]
 
 == 코스 API
 
-=== 코스 작성
+=== 코스 생성
 
 ==== Http Request
 include::{snippets}/course-create/http-request.adoc[]
@@ -140,11 +140,50 @@ include::{snippets}/course-delete/http-request.adoc[]
 include::{snippets}/course-delete/http-response.adoc[]
 include::{snippets}/course-delete/response-fields.adoc[]
 
+=== 코스 안에 장소 넣기(처음 생성)
+
+==== Http Request
+include::{snippets}/courseLocal-create/http-request.adoc[]
+include::{snippets}/courseLocal-create/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/courseLocal-create/http-response.adoc[]
+include::{snippets}/courseLocal-create/response-fields.adoc[]
+
+=== 코스 안에 장소 넣기(이후에 하나씩 추가)
+
+==== Http Request
+include::{snippets}/courseLocal-add-local/http-request.adoc[]
+include::{snippets}/courseLocal-add-local/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/courseLocal-add-local/http-response.adoc[]
+include::{snippets}/courseLocal-add-local/response-fields.adoc[]
+
+=== 코스 안에 담긴 장소 가져오기
+
+==== Http Request
+include::{snippets}/courseLocal-get-single/http-request.adoc[]
+
+==== Http Response
+include::{snippets}/courseLocal-get-single/http-response.adoc[]
+include::{snippets}/courseLocal-get-single/response-fields.adoc[]
+
+=== 코스 안에 장소 순서 바꾸기
+
+==== Http Request
+include::{snippets}/courseLocal-update/http-request.adoc[]
+include::{snippets}/courseLocal-update/request-fields.adoc[]
+
+==== Http Response
+include::{snippets}/courseLocal-update/http-response.adoc[]
+include::{snippets}/courseLocal-update/response-fields.adoc[]
+
 === ㅤ
 
 == 코스 리뷰 API
 
-=== 코스 리뷰 작성
+=== 코스 리뷰 생성
 
 ==== Http Request
 include::{snippets}/courseReview-create/http-request.adoc[]
@@ -197,7 +236,7 @@ include::{snippets}/courseReview-delete/response-fields.adoc[]
 
 == 장소 API
 
-=== 장소 추가
+=== 장소 생성
 
 ==== Http Request
 include::{snippets}/local-create/http-request.adoc[]
@@ -364,11 +403,3 @@ include::{snippets}/favorite-delete/http-request.adoc[]
 ==== Http Response
 include::{snippets}/favorite-delete/http-response.adoc[]
 include::{snippets}/favorite-delete/response-fields.adoc[]
-
-// === 장소 내 코스에 추가 요청
-
-// include::{snippets}/index/http-request.adoc[]
-
-// === 장소 리뷰 응답
-
-// include::{snippets}/index/http-response.adoc[]

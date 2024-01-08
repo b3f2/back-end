@@ -80,4 +80,14 @@ public class ApiControllerAdvice {
                 null
         );
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CourseLocalNotFoundException.class)
+    public ApiResponse<Object> handleCourseLocalNotFoundException(CourseLocalNotFoundException e) {
+        return ApiResponse.of(
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                null
+        );
+    }
 }
