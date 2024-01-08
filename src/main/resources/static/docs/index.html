@@ -461,18 +461,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_코스_api">코스 API</a>
 <ul class="sectlevel2">
-<li><a href="#_코스_작성">코스 작성</a></li>
+<li><a href="#_코스_생성">코스 생성</a></li>
 <li><a href="#_코스_단건_조회">코스 단건 조회</a></li>
 <li><a href="#_코스_목록_조회">코스 목록 조회</a></li>
 <li><a href="#_사용자의_코스_조회">사용자의 코스 조회</a></li>
 <li><a href="#_코스_편집">코스 편집</a></li>
 <li><a href="#_코스_삭제">코스 삭제</a></li>
+<li><a href="#_코스_안에_장소_넣기처음_생성">코스 안에 장소 넣기(처음 생성)</a></li>
+<li><a href="#_코스_안에_장소_넣기이후에_하나씩_추가">코스 안에 장소 넣기(이후에 하나씩 추가)</a></li>
+<li><a href="#_코스_안에_담긴_장소_가져오기">코스 안에 담긴 장소 가져오기</a></li>
+<li><a href="#_코스_안에_장소_순서_바꾸기">코스 안에 장소 순서 바꾸기</a></li>
 <li><a href="#_ㅤ_2">ㅤ</a></li>
 </ul>
 </li>
 <li><a href="#_코스_리뷰_api">코스 리뷰 API</a>
 <ul class="sectlevel2">
-<li><a href="#_코스_리뷰_작성">코스 리뷰 작성</a></li>
+<li><a href="#_코스_리뷰_생성">코스 리뷰 생성</a></li>
 <li><a href="#_사용자의_코스_리뷰_조회">사용자의 코스 리뷰 조회</a></li>
 <li><a href="#_모든_코스_리뷰_조회">모든 코스 리뷰 조회</a></li>
 <li><a href="#_코스_리뷰_편집">코스 리뷰 편집</a></li>
@@ -482,7 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_장소_api">장소 API</a>
 <ul class="sectlevel2">
-<li><a href="#_장소_추가">장소 추가</a></li>
+<li><a href="#_장소_생성">장소 생성</a></li>
 <li><a href="#_장소_단건_조회">장소 단건 조회</a></li>
 <li><a href="#_장소_목록_조회">장소 목록 조회</a></li>
 <li><a href="#_사용자의_장소_목록_조회">사용자의 장소 목록 조회</a></li>
@@ -622,7 +626,7 @@ Content-Length: 470
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$zPzTnBQd0uUkoe5x.ywpKOQj8SJMvw0sH4QUyot1OV0MIRoHOVXay",
+    "password" : "$2a$10$3wlKSY/ZqFXbMups/rtyNec2V90XRZhQ/tRGJLU.ABClP5S/326r6",
     "nickName" : "user",
     "address" : {
       "city" : "서울특별시",
@@ -738,7 +742,7 @@ Content-Length: 470
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/login HTTP/1.1
 Content-Type: application/json
-Content-Length: 55
+Content-Length: 58
 Host: localhost:8080
 
 {
@@ -783,10 +787,10 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Authorization: Bearer com.backend.api.request.util.AccessToken@247d6992
-Set-Cookie: Authorization-refresh=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Tue, 03 Mar 2043 07:01:10 GMT; HttpOnly
+Authorization: Bearer com.backend.api.request.util.AccessToken@4f5bb24d
+Set-Cookie: Authorization-refresh=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Fri, 06 Mar 2043 11:27:27 GMT; HttpOnly
 Content-Type: application/json
-Content-Length: 290
+Content-Length: 304
 
 {
   "code" : 200,
@@ -881,7 +885,7 @@ Content-Length: 290
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/logout HTTP/1.1
 Content-Type: application/json
-Content-Length: 56
+Content-Length: 59
 Host: localhost:8080
 
 {
@@ -928,7 +932,7 @@ Host: localhost:8080
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Set-Cookie: Authorization-refresh=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT
 Content-Type: application/json
-Content-Length: 91
+Content-Length: 96
 
 {
   "code" : 200,
@@ -984,7 +988,7 @@ Content-Length: 91
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/reissue HTTP/1.1
 Content-Type: application/json
-Content-Length: 67
+Content-Length: 70
 Host: localhost:8080
 
 {
@@ -1029,10 +1033,10 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Authorization: Bearer com.backend.api.request.util.AccessToken@5ec30886
-Set-Cookie: Authorization=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Tue, 03 Mar 2043 07:01:11 GMT; HttpOnly
+Authorization: Bearer com.backend.api.request.util.AccessToken@3c090ae5
+Set-Cookie: Authorization=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Fri, 06 Mar 2043 11:27:27 GMT; HttpOnly
 Content-Type: application/json
-Content-Length: 290
+Content-Length: 304
 
 {
   "code" : 200,
@@ -1136,7 +1140,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 470
+Content-Length: 489
 
 {
   "code" : 200,
@@ -1145,7 +1149,7 @@ Content-Length: 470
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$zPzTnBQd0uUkoe5x.ywpKOQj8SJMvw0sH4QUyot1OV0MIRoHOVXay",
+    "password" : "$2a$10$3wlKSY/ZqFXbMups/rtyNec2V90XRZhQ/tRGJLU.ABClP5S/326r6",
     "nickName" : "user",
     "address" : {
       "city" : "서울특별시",
@@ -1261,7 +1265,7 @@ Content-Length: 470
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/user/edit HTTP/1.1
 Content-Type: application/json
-Content-Length: 139
+Content-Length: 145
 Host: localhost:8080
 
 {
@@ -1328,7 +1332,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 450
+Content-Length: 469
 
 {
   "code" : 200,
@@ -1337,7 +1341,7 @@ Content-Length: 450
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$8BP0qiKQDew2G0nbJ/g28eUiXO64oyxR/S.fn2kOSuCDfPDvFUwzG",
+    "password" : "$2a$10$zYyDzKQaEo8dNMiS2AxJP.kN7xLdZpdx50bKw79a1hASlo/yw5IIS",
     "nickName" : "user",
     "address" : {
       "city" : "서울",
@@ -1462,7 +1466,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 92
+Content-Length: 97
 
 {
   "code" : 200,
@@ -1520,14 +1524,14 @@ Content-Length: 92
 <h2 id="_코스_api"><a class="link" href="#_코스_api">코스 API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_코스_작성"><a class="link" href="#_코스_작성">코스 작성</a></h3>
+<h3 id="_코스_생성"><a class="link" href="#_코스_생성">코스 생성</a></h3>
 <div class="sect3">
 <h4 id="_http_request_8"><a class="link" href="#_http_request_8">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/courses HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 25
+Content-Length: 27
 Host: localhost:8080
 
 {
@@ -1555,7 +1559,7 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">코스 이름</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
@@ -1566,7 +1570,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 99
+Content-Length: 106
 
 {
   "code" : 200,
@@ -1658,7 +1662,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 99
+Content-Length: 106
 
 {
   "code" : 200,
@@ -1731,7 +1735,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 165
+Content-Length: 176
 
 {
   "code" : 200,
@@ -1796,13 +1800,13 @@ Content-Length: 165
 <h4 id="_http_request_11"><a class="link" href="#_http_request_11">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/users/1/courses HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/user/1/courses HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. /api/users/{userId}/courses</caption>
+<caption class="title">Table 2. /api/user/{userId}/courses</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1827,7 +1831,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 177
+Content-Length: 188
 
 {
   "code" : 200,
@@ -1913,11 +1917,11 @@ Content-Length: 177
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/courses/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 25
+Content-Length: 42
 Host: localhost:8080
 
 {
-  "name" : "코스 1"
+  "name" : "변경된 코스 이름"
 }</code></pre>
 </div>
 </div>
@@ -1940,8 +1944,8 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">코스 이름</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">변경할 코스 이름</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
@@ -1952,14 +1956,14 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 107
+Content-Length: 121
 
 {
   "code" : 200,
   "status" : "OK",
   "message" : "OK",
   "data" : {
-    "name" : "편집된 코스"
+    "name" : "변경된 코스 이름"
   }
 }</code></pre>
 </div>
@@ -2001,7 +2005,7 @@ Content-Length: 107
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">수정된 코스</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">변경된 코스 이름</p></td>
 </tr>
 </tbody>
 </table>
@@ -2044,7 +2048,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 92
+Content-Length: 97
 
 {
   "code" : 200,
@@ -2093,6 +2097,488 @@ Content-Length: 92
 </div>
 </div>
 <div class="sect2">
+<h3 id="_코스_안에_장소_넣기처음_생성"><a class="link" href="#_코스_안에_장소_넣기처음_생성">코스 안에 장소 넣기(처음 생성)</a></h3>
+<div class="sect3">
+<h4 id="_http_request_14"><a class="link" href="#_http_request_14">Http Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-local HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 40
+Host: localhost:8080
+
+{
+  "localId" : 1,
+  "courseId" : 1
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">courseId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">localId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_http_response_14"><a class="link" href="#_http_response_14">Http Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 153
+
+{
+  "code" : 200,
+  "status" : "OK",
+  "message" : "OK",
+  "data" : {
+    "id" : 1,
+    "courseId" : 1,
+    "localId" : 1,
+    "turn" : 0
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">상태</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CourseLocal ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.courseId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.localId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.turn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 순서</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_코스_안에_장소_넣기이후에_하나씩_추가"><a class="link" href="#_코스_안에_장소_넣기이후에_하나씩_추가">코스 안에 장소 넣기(이후에 하나씩 추가)</a></h3>
+<div class="sect3">
+<h4 id="_http_request_15"><a class="link" href="#_http_request_15">Http Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-local/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 21
+Host: localhost:8080
+
+{
+  "localId" : 1
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">localId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_http_response_15"><a class="link" href="#_http_response_15">Http Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 153
+
+{
+  "code" : 200,
+  "status" : "OK",
+  "message" : "OK",
+  "data" : {
+    "id" : 1,
+    "courseId" : 1,
+    "localId" : 1,
+    "turn" : 0
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">상태</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CourseLocal ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.courseId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.localId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.turn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 순서</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_코스_안에_담긴_장소_가져오기"><a class="link" href="#_코스_안에_담긴_장소_가져오기">코스 안에 담긴 장소 가져오기</a></h3>
+<div class="sect3">
+<h4 id="_http_request_16"><a class="link" href="#_http_request_16">Http Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/course-local/1 HTTP/1.1
+Accept: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_http_response_16"><a class="link" href="#_http_response_16">Http Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 237
+
+{
+  "code" : 200,
+  "status" : "OK",
+  "message" : "OK",
+  "data" : [ {
+    "id" : 1,
+    "courseId" : 1,
+    "localId" : 1,
+    "turn" : 0
+  }, {
+    "id" : 2,
+    "courseId" : 1,
+    "localId" : 2,
+    "turn" : 1
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">상태</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CourseLocal ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].courseId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].localId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].turn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 순서</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_코스_안에_장소_순서_바꾸기"><a class="link" href="#_코스_안에_장소_순서_바꾸기">코스 안에 장소 순서 바꾸기</a></h3>
+<div class="sect3">
+<h4 id="_http_request_17"><a class="link" href="#_http_request_17">Http Request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/course-local HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 55
+Host: localhost:8080
+
+{
+  "courseId" : 1,
+  "localId" : 1,
+  "turn" : 1
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">courseId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">localId</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">turn</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 순서[0, 1, 2, &#8230;&#8203;]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_http_response_17"><a class="link" href="#_http_response_17">Http Response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 237
+
+{
+  "code" : 200,
+  "status" : "OK",
+  "message" : "OK",
+  "data" : [ {
+    "id" : 1,
+    "courseId" : 1,
+    "localId" : 1,
+    "turn" : 0
+  }, {
+    "id" : 2,
+    "courseId" : 1,
+    "localId" : 2,
+    "turn" : 1
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>code</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">상태</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CourseLocal ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].courseId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].localId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[].turn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">코스 순서</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_ㅤ_2"><a class="link" href="#_ㅤ_2">ㅤ</a></h3>
 
 </div>
@@ -2102,14 +2588,14 @@ Content-Length: 92
 <h2 id="_코스_리뷰_api"><a class="link" href="#_코스_리뷰_api">코스 리뷰 API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_코스_리뷰_작성"><a class="link" href="#_코스_리뷰_작성">코스 리뷰 작성</a></h3>
+<h3 id="_코스_리뷰_생성"><a class="link" href="#_코스_리뷰_생성">코스 리뷰 생성</a></h3>
 <div class="sect3">
-<h4 id="_http_request_14"><a class="link" href="#_http_request_14">Http Request</a></h4>
+<h4 id="_http_request_18"><a class="link" href="#_http_request_18">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-review HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 67
+Content-Length: 71
 Host: localhost:8080
 
 {
@@ -2139,30 +2625,30 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">코스 리뷰 내용</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">rating</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">평점</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">courseId</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">코스 아이디</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_http_response_14"><a class="link" href="#_http_response_14">Http Response</a></h4>
+<h4 id="_http_response_18"><a class="link" href="#_http_response_18">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 125
+Content-Length: 133
 
 {
   "code" : 200,
@@ -2226,9 +2712,9 @@ Content-Length: 125
 <div class="sect2">
 <h3 id="_사용자의_코스_리뷰_조회"><a class="link" href="#_사용자의_코스_리뷰_조회">사용자의 코스 리뷰 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_15"><a class="link" href="#_http_request_15">Http Request</a></h4>
+<h4 id="_http_request_19"><a class="link" href="#_http_request_19">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. /api/users/{userId}/course-review</caption>
+<caption class="title">Table 5. /api/user/{userId}/course-review</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2248,19 +2734,19 @@ Content-Length: 125
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/users/1/course-review HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/user/1/course-review HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_15"><a class="link" href="#_http_response_15">Http Response</a></h4>
+<h4 id="_http_response_19"><a class="link" href="#_http_response_19">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 245
+Content-Length: 259
 
 {
   "code" : 200,
@@ -2330,7 +2816,7 @@ Content-Length: 245
 <div class="sect2">
 <h3 id="_모든_코스_리뷰_조회"><a class="link" href="#_모든_코스_리뷰_조회">모든 코스 리뷰 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_16"><a class="link" href="#_http_request_16">Http Request</a></h4>
+<h4 id="_http_request_20"><a class="link" href="#_http_request_20">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/course-review HTTP/1.1
@@ -2340,12 +2826,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_16"><a class="link" href="#_http_response_16">Http Response</a></h4>
+<h4 id="_http_response_20"><a class="link" href="#_http_response_20">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 361
+Content-Length: 381
 
 {
   "code" : 200,
@@ -2421,7 +2907,7 @@ Content-Length: 361
 <div class="sect2">
 <h3 id="_코스_리뷰_편집"><a class="link" href="#_코스_리뷰_편집">코스 리뷰 편집</a></h3>
 <div class="sect3">
-<h4 id="_http_request_17"><a class="link" href="#_http_request_17">Http Request</a></h4>
+<h4 id="_http_request_21"><a class="link" href="#_http_request_21">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 6. /api/course-review/{id}</caption>
 <colgroup>
@@ -2445,7 +2931,7 @@ Content-Length: 361
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/course-review/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 67
+Content-Length: 71
 Host: localhost:8080
 
 {
@@ -2457,12 +2943,12 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_17"><a class="link" href="#_http_response_17">Http Response</a></h4>
+<h4 id="_http_response_21"><a class="link" href="#_http_response_21">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 135
+Content-Length: 143
 
 {
   "code" : 200,
@@ -2526,7 +3012,7 @@ Content-Length: 135
 <div class="sect2">
 <h3 id="_코스_리뷰_삭제"><a class="link" href="#_코스_리뷰_삭제">코스 리뷰 삭제</a></h3>
 <div class="sect3">
-<h4 id="_http_request_18"><a class="link" href="#_http_request_18">Http Request</a></h4>
+<h4 id="_http_request_22"><a class="link" href="#_http_request_22">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. /api/course-review/{id}</caption>
 <colgroup>
@@ -2555,12 +3041,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_18"><a class="link" href="#_http_response_18">Http Response</a></h4>
+<h4 id="_http_response_22"><a class="link" href="#_http_response_22">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 99
+Content-Length: 104
 
 {
   "code" : 200,
@@ -2618,14 +3104,14 @@ Content-Length: 99
 <h2 id="_장소_api"><a class="link" href="#_장소_api">장소 API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_장소_추가"><a class="link" href="#_장소_추가">장소 추가</a></h3>
+<h3 id="_장소_생성"><a class="link" href="#_장소_생성">장소 생성</a></h3>
 <div class="sect3">
-<h4 id="_http_request_19"><a class="link" href="#_http_request_19">Http Request</a></h4>
+<h4 id="_http_request_23"><a class="link" href="#_http_request_23">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/locals HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 211
+Content-Length: 221
 Host: localhost:8080
 
 {
@@ -2661,60 +3147,60 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">장소 저장 이름</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x 좌표</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">y</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">y 좌표</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">address</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">주소</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">address.city</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">시군구</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">address.street</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">도로명 주소</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">address.zipcode</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">동호수</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">areaCategory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">장소 카테고리</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_http_response_19"><a class="link" href="#_http_response_19">Http Response</a></h4>
+<h4 id="_http_response_23"><a class="link" href="#_http_response_23">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 301
+Content-Length: 316
 
 {
   "code" : 200,
@@ -2815,7 +3301,7 @@ Content-Length: 301
 <div class="sect2">
 <h3 id="_장소_단건_조회"><a class="link" href="#_장소_단건_조회">장소 단건 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_20"><a class="link" href="#_http_request_20">Http Request</a></h4>
+<h4 id="_http_request_24"><a class="link" href="#_http_request_24">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 8. /api/locals/{id}</caption>
 <colgroup>
@@ -2844,12 +3330,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_20"><a class="link" href="#_http_response_20">Http Response</a></h4>
+<h4 id="_http_response_24"><a class="link" href="#_http_response_24">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 301
+Content-Length: 316
 
 {
   "code" : 200,
@@ -2950,7 +3436,7 @@ Content-Length: 301
 <div class="sect2">
 <h3 id="_장소_목록_조회"><a class="link" href="#_장소_목록_조회">장소 목록 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_21"><a class="link" href="#_http_request_21">Http Request</a></h4>
+<h4 id="_http_request_25"><a class="link" href="#_http_request_25">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/locals HTTP/1.1
@@ -2960,12 +3446,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_21"><a class="link" href="#_http_response_21">Http Response</a></h4>
+<h4 id="_http_response_25"><a class="link" href="#_http_response_25">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 784
+Content-Length: 819
 
 {
   "code" : 200,
@@ -3086,7 +3572,7 @@ Content-Length: 784
 <div class="sect2">
 <h3 id="_사용자의_장소_목록_조회"><a class="link" href="#_사용자의_장소_목록_조회">사용자의 장소 목록 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_22"><a class="link" href="#_http_request_22">Http Request</a></h4>
+<h4 id="_http_request_26"><a class="link" href="#_http_request_26">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 9. /api/user/{userId}/locals</caption>
 <colgroup>
@@ -3115,12 +3601,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_22"><a class="link" href="#_http_response_22">Http Response</a></h4>
+<h4 id="_http_response_26"><a class="link" href="#_http_response_26">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 784
+Content-Length: 819
 
 {
   "code" : 200,
@@ -3241,7 +3727,7 @@ Content-Length: 784
 <div class="sect2">
 <h3 id="_장소_삭제"><a class="link" href="#_장소_삭제">장소 삭제</a></h3>
 <div class="sect3">
-<h4 id="_http_request_23"><a class="link" href="#_http_request_23">Http Request</a></h4>
+<h4 id="_http_request_27"><a class="link" href="#_http_request_27">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 10. /api/locals/{id}</caption>
 <colgroup>
@@ -3270,12 +3756,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_23"><a class="link" href="#_http_response_23">Http Response</a></h4>
+<h4 id="_http_response_27"><a class="link" href="#_http_response_27">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 92
+Content-Length: 97
 
 {
   "code" : 200,
@@ -3335,12 +3821,12 @@ Content-Length: 92
 <div class="sect2">
 <h3 id="_장소_리뷰_생성"><a class="link" href="#_장소_리뷰_생성">장소 리뷰 생성</a></h3>
 <div class="sect3">
-<h4 id="_http_request_24"><a class="link" href="#_http_request_24">Http Request</a></h4>
+<h4 id="_http_request_28"><a class="link" href="#_http_request_28">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/local-review HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 66
+Content-Length: 70
 Host: localhost:8080
 
 {
@@ -3370,30 +3856,30 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">장소 리뷰 내용</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">rating</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">평점</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">localId</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">장소 아이디</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_http_response_24"><a class="link" href="#_http_response_24">Http Response</a></h4>
+<h4 id="_http_response_28"><a class="link" href="#_http_response_28">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 125
+Content-Length: 133
 
 {
   "code" : 200,
@@ -3457,7 +3943,7 @@ Content-Length: 125
 <div class="sect2">
 <h3 id="_코스_리뷰_단건_조회"><a class="link" href="#_코스_리뷰_단건_조회">코스 리뷰 단건 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_25"><a class="link" href="#_http_request_25">Http Request</a></h4>
+<h4 id="_http_request_29"><a class="link" href="#_http_request_29">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 11. /api/local-review/{id}</caption>
 <colgroup>
@@ -3486,12 +3972,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_25"><a class="link" href="#_http_response_25">Http Response</a></h4>
+<h4 id="_http_response_29"><a class="link" href="#_http_response_29">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 125
+Content-Length: 133
 
 {
   "code" : 200,
@@ -3555,7 +4041,7 @@ Content-Length: 125
 <div class="sect2">
 <h3 id="_사용자의_장소_리뷰_조회"><a class="link" href="#_사용자의_장소_리뷰_조회">사용자의 장소 리뷰 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_26"><a class="link" href="#_http_request_26">Http Request</a></h4>
+<h4 id="_http_request_30"><a class="link" href="#_http_request_30">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. /api/user/{userId}/local-review</caption>
 <colgroup>
@@ -3584,12 +4070,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_26"><a class="link" href="#_http_response_26">Http Response</a></h4>
+<h4 id="_http_response_30"><a class="link" href="#_http_response_30">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 245
+Content-Length: 259
 
 {
   "code" : 200,
@@ -3659,7 +4145,7 @@ Content-Length: 245
 <div class="sect2">
 <h3 id="_장소_리뷰_편집"><a class="link" href="#_장소_리뷰_편집">장소 리뷰 편집</a></h3>
 <div class="sect3">
-<h4 id="_http_request_27"><a class="link" href="#_http_request_27">Http Request</a></h4>
+<h4 id="_http_request_31"><a class="link" href="#_http_request_31">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 13. /api/local-review/{id}</caption>
 <colgroup>
@@ -3683,7 +4169,7 @@ Content-Length: 245
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/local-review/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 66
+Content-Length: 70
 Host: localhost:8080
 
 {
@@ -3695,12 +4181,12 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_27"><a class="link" href="#_http_response_27">Http Response</a></h4>
+<h4 id="_http_response_31"><a class="link" href="#_http_response_31">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 135
+Content-Length: 143
 
 {
   "code" : 200,
@@ -3764,7 +4250,7 @@ Content-Length: 135
 <div class="sect2">
 <h3 id="_장소_리뷰_삭제"><a class="link" href="#_장소_리뷰_삭제">장소 리뷰 삭제</a></h3>
 <div class="sect3">
-<h4 id="_http_request_28"><a class="link" href="#_http_request_28">Http Request</a></h4>
+<h4 id="_http_request_32"><a class="link" href="#_http_request_32">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 14. /api/local-review/{id}</caption>
 <colgroup>
@@ -3793,12 +4279,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_28"><a class="link" href="#_http_response_28">Http Response</a></h4>
+<h4 id="_http_response_32"><a class="link" href="#_http_response_32">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 99
+Content-Length: 104
 
 {
   "code" : 200,
@@ -3858,12 +4344,12 @@ Content-Length: 99
 <div class="sect2">
 <h3 id="_즐겨찾기폴더_생성"><a class="link" href="#_즐겨찾기폴더_생성">즐겨찾기(폴더) 생성</a></h3>
 <div class="sect3">
-<h4 id="_http_request_29"><a class="link" href="#_http_request_29">Http Request</a></h4>
+<h4 id="_http_request_33"><a class="link" href="#_http_request_33">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/favorites HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 33
+Content-Length: 35
 Host: localhost:8080
 
 {
@@ -3891,18 +4377,18 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">즐겨찾기 폴더 이름</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_http_response_29"><a class="link" href="#_http_response_29">Http Response</a></h4>
+<h4 id="_http_response_33"><a class="link" href="#_http_response_33">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 107
+Content-Length: 114
 
 {
   "code" : 200,
@@ -3960,12 +4446,12 @@ Content-Length: 107
 <div class="sect2">
 <h3 id="_즐겨찾기폴더_안에_장소_넣기"><a class="link" href="#_즐겨찾기폴더_안에_장소_넣기">즐겨찾기(폴더) 안에 장소 넣기</a></h3>
 <div class="sect3">
-<h4 id="_http_request_30"><a class="link" href="#_http_request_30">Http Request</a></h4>
+<h4 id="_http_request_34"><a class="link" href="#_http_request_34">Http Request</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/favorites/1/local HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 19
+Content-Length: 21
 Host: localhost:8080
 
 {
@@ -3993,18 +4479,18 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">localId</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">장소 ID</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_http_response_30"><a class="link" href="#_http_response_30">Http Response</a></h4>
+<h4 id="_http_response_34"><a class="link" href="#_http_response_34">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 129
+Content-Length: 138
 
 {
   "code" : 200,
@@ -4074,7 +4560,7 @@ Content-Length: 129
 <div class="sect2">
 <h3 id="_즐겨찾기폴더_단건_조회"><a class="link" href="#_즐겨찾기폴더_단건_조회">즐겨찾기(폴더) 단건 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_31"><a class="link" href="#_http_request_31">Http Request</a></h4>
+<h4 id="_http_request_35"><a class="link" href="#_http_request_35">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 15. /api/favorites/{favoriteId}</caption>
 <colgroup>
@@ -4103,12 +4589,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_31"><a class="link" href="#_http_response_31">Http Response</a></h4>
+<h4 id="_http_response_35"><a class="link" href="#_http_response_35">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 378
+Content-Length: 396
 
 {
   "code" : 200,
@@ -4132,14 +4618,14 @@ Content-Length: 378
 </div>
 </div>
 <div class="paragraph">
-<p>include::/Users/sim-yuri/Desktop/back-end/build/generated-snippets/favorite-get-single/response-fields.adoc[]ㅤ</p>
+<p>include::C:\Programming\where-shall-we-go\back-end\build\generated-snippets/favorite-get-single/response-fields.adoc[]ㅤ</p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_사용자의_즐겨찾기폴더_조회"><a class="link" href="#_사용자의_즐겨찾기폴더_조회">사용자의 즐겨찾기(폴더) 조회</a></h3>
 <div class="sect3">
-<h4 id="_http_request_32"><a class="link" href="#_http_request_32">Http Request</a></h4>
+<h4 id="_http_request_36"><a class="link" href="#_http_request_36">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 16. /api/user/{userId}/favorites</caption>
 <colgroup>
@@ -4168,12 +4654,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_32"><a class="link" href="#_http_response_32">Http Response</a></h4>
+<h4 id="_http_response_36"><a class="link" href="#_http_response_36">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 267
+Content-Length: 278
 
 {
   "code" : 200,
@@ -4240,7 +4726,7 @@ Content-Length: 267
 <div class="sect2">
 <h3 id="_내_즐겨찾기폴더_이름_변경"><a class="link" href="#_내_즐겨찾기폴더_이름_변경">내 즐겨찾기(폴더) 이름 변경</a></h3>
 <div class="sect3">
-<h4 id="_http_request_33"><a class="link" href="#_http_request_33">Http Request</a></h4>
+<h4 id="_http_request_37"><a class="link" href="#_http_request_37">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 17. /api/favorites/{favoriteId}</caption>
 <colgroup>
@@ -4264,7 +4750,7 @@ Content-Length: 267
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/favorites/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 36
+Content-Length: 38
 Host: localhost:8080
 
 {
@@ -4274,12 +4760,12 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_33"><a class="link" href="#_http_response_33">Http Response</a></h4>
+<h4 id="_http_response_37"><a class="link" href="#_http_response_37">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 110
+Content-Length: 117
 
 {
   "code" : 200,
@@ -4337,7 +4823,7 @@ Content-Length: 110
 <div class="sect2">
 <h3 id="_내_즐겨찾기폴더_삭제_요청"><a class="link" href="#_내_즐겨찾기폴더_삭제_요청">내 즐겨찾기(폴더) 삭제 요청</a></h3>
 <div class="sect3">
-<h4 id="_http_request_34"><a class="link" href="#_http_request_34">Http Request</a></h4>
+<h4 id="_http_request_38"><a class="link" href="#_http_request_38">Http Request</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 18. /api/favorites/{id}</caption>
 <colgroup>
@@ -4366,12 +4852,12 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_http_response_34"><a class="link" href="#_http_response_34">Http Response</a></h4>
+<h4 id="_http_response_38"><a class="link" href="#_http_response_38">Http Response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 92
+Content-Length: 97
 
 {
   "code" : 200,
@@ -4425,7 +4911,7 @@ Content-Length: 92
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-01-02 15:10:32 +0900
+Last updated 2024-01-05 20:20:30 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

@@ -1,6 +1,5 @@
 package com.backend.api.config.factory;
 
-import com.backend.api.entity.post.Image;
 import com.backend.api.request.post.PostCreateRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +16,6 @@ public class PostCreateRequestFactory {
                 new MockMultipartFile("test3", "test3.PNG", MediaType.IMAGE_PNG_VALUE, "test3".getBytes())
         ));
     }
-
 
     public static PostCreateRequest createPostCreateRequest(String title, String content, Long categoryId, Long userId, List<MultipartFile> images) {
         return new PostCreateRequest(title, content, categoryId, userId, images);
