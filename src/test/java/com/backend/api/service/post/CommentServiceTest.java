@@ -47,7 +47,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void createTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -74,7 +73,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void readAllTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -100,7 +98,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void deleteCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
@@ -127,7 +124,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void updateCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
@@ -153,7 +149,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void createExceptionByUserNotFoundTest() {
         //given
         LoginResponse loginResponse = LoginResponse.builder().build();
@@ -164,7 +159,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     void createExceptionByCommentNotFoundTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -183,7 +177,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     @DisplayName("댓글 좋아요")
     void likeCommentTest() throws IOException {
         //given
@@ -209,7 +202,6 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     @DisplayName("댓글 좋아요 취소")
     void unlikeCommentTest() throws IOException {
         //given
