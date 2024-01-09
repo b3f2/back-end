@@ -1,4 +1,4 @@
-package com.backend.api.docs.Post;
+package com.backend.api.docs.comment;
 
 import com.backend.api.controller.comment.CommentController;
 import com.backend.api.docs.RestDocsSupport;
