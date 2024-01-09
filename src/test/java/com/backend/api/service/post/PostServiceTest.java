@@ -50,7 +50,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void createTest() throws IOException {
         // given
         PostCreateRequest req = createPostCreateRequest();
@@ -74,7 +74,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void createWithoutPictureTest() throws IOException {
         // given
         PostCreateRequest req = createPostCreateRequest();
@@ -106,7 +106,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void createExceptionByCategoryNotFoundTest() throws IOException {
         //given
         List<MultipartFile> images = createImages();
@@ -117,7 +117,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void readTest() throws IOException {
         //given
 
@@ -149,7 +149,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void readAllTest() throws IOException {
         //given
         categoryRepository.save(Category.builder()
@@ -175,7 +175,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void deleteTest() throws IOException {
         //given
         PostCreateRequest req = createPostCreateRequest();
@@ -208,7 +208,7 @@ public class PostServiceTest extends ServiceTestSupport {
 
     @Test
     @Transactional
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void updateTest() throws IOException {
         //given
         List<MultipartFile> images = createImages();
@@ -262,7 +262,7 @@ public class PostServiceTest extends ServiceTestSupport {
 
     @Test
     @DisplayName("게시글 좋아요")
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void likePostTest() throws Exception{
         //given
         PostCreateRequest req = createPostCreateRequest();
@@ -285,7 +285,7 @@ public class PostServiceTest extends ServiceTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
+//    @WithMockCustomUser
     void unlikePostTest() throws Exception {
         // given
         PostCreateRequest req = createPostCreateRequest();
