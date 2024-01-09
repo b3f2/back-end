@@ -50,7 +50,6 @@ public class CommentControllerTest extends ControllerTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     @DisplayName("댓글 수정")
     void updateTest() throws Exception {
         //given
