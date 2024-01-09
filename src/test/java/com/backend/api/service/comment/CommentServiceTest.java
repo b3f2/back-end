@@ -47,6 +47,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void createTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -74,6 +75,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void readAllTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -101,6 +103,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void deleteCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
@@ -128,6 +131,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void updateCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
@@ -164,6 +168,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void createExceptionByCommentNotFoundTest() throws IOException{
         //given
         LoginResponse loginResponse = createLogin();
@@ -182,6 +187,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void likeCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
@@ -207,6 +213,7 @@ public class CommentServiceTest extends ServiceTestSupport {
     }
 
     @Test
+    @WithMockCustomUser
     void unlikeCommentTest() throws IOException {
         //given
         LoginResponse loginResponse = createLogin();
