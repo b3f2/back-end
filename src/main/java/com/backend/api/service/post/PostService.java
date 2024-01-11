@@ -4,7 +4,7 @@ import com.backend.api.dto.post.*;
 import com.backend.api.entity.post.*;
 import com.backend.api.entity.user.User;
 import com.backend.api.exception.*;
-import com.backend.api.repository.post.CommentRepository;
+import com.backend.api.repository.comment.CommentRepository;
 import com.backend.api.repository.post.CategoryRepository;
 import com.backend.api.repository.post.ImageRepository;
 import com.backend.api.repository.post.PostLikeRepository;

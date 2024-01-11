@@ -63,7 +63,6 @@ public class PostControllerTest extends ControllerTestSupport {
     }
 
     @Test
-    @WithMockCustomUser
     @DisplayName("게시글 작성")
     void createTest() throws Exception {
         //given

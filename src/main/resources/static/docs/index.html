@@ -529,7 +529,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/signup HTTP/1.1
 Content-Type: application/json
-Content-Length: 246
+Content-Length: 237
 Host: localhost:8080
 
 {
@@ -617,7 +617,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 489
+Content-Length: 470
 
 {
   "code" : 200,
@@ -626,7 +626,7 @@ Content-Length: 489
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$3wlKSY/ZqFXbMups/rtyNec2V90XRZhQ/tRGJLU.ABClP5S/326r6",
+    "password" : "$2a$10$pP2RP8kW79nPjNziV2/L4eNyaQ2wCsSp/Kiq3gZOG.XUwYMpts7LC",
     "nickName" : "user",
     "address" : {
       "city" : "서울특별시",
@@ -742,7 +742,7 @@ Content-Length: 489
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/login HTTP/1.1
 Content-Type: application/json
-Content-Length: 58
+Content-Length: 55
 Host: localhost:8080
 
 {
@@ -787,10 +787,10 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Authorization: Bearer com.backend.api.request.util.AccessToken@4f5bb24d
-Set-Cookie: Authorization-refresh=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Fri, 06 Mar 2043 11:27:27 GMT; HttpOnly
+Authorization: Bearer com.backend.api.request.util.AccessToken@1c4de603
+Set-Cookie: Authorization-refresh=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Tue, 10 Mar 2043 06:36:33 GMT; HttpOnly
 Content-Type: application/json
-Content-Length: 304
+Content-Length: 290
 
 {
   "code" : 200,
@@ -885,7 +885,7 @@ Content-Length: 304
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/logout HTTP/1.1
 Content-Type: application/json
-Content-Length: 59
+Content-Length: 56
 Host: localhost:8080
 
 {
@@ -932,7 +932,7 @@ Host: localhost:8080
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Set-Cookie: Authorization-refresh=; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT
 Content-Type: application/json
-Content-Length: 96
+Content-Length: 91
 
 {
   "code" : 200,
@@ -988,7 +988,7 @@ Content-Length: 96
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/reissue HTTP/1.1
 Content-Type: application/json
-Content-Length: 70
+Content-Length: 67
 Host: localhost:8080
 
 {
@@ -1033,10 +1033,10 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Authorization: Bearer com.backend.api.request.util.AccessToken@3c090ae5
-Set-Cookie: Authorization=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Fri, 06 Mar 2043 11:27:27 GMT; HttpOnly
+Authorization: Bearer com.backend.api.request.util.AccessToken@198e7fda
+Set-Cookie: Authorization=Bearer + RefreshTokenData; Path=/; Max-Age=604800000; Expires=Tue, 10 Mar 2043 06:36:33 GMT; HttpOnly
 Content-Type: application/json
-Content-Length: 304
+Content-Length: 290
 
 {
   "code" : 200,
@@ -1140,7 +1140,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 489
+Content-Length: 470
 
 {
   "code" : 200,
@@ -1149,7 +1149,7 @@ Content-Length: 489
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$3wlKSY/ZqFXbMups/rtyNec2V90XRZhQ/tRGJLU.ABClP5S/326r6",
+    "password" : "$2a$10$pP2RP8kW79nPjNziV2/L4eNyaQ2wCsSp/Kiq3gZOG.XUwYMpts7LC",
     "nickName" : "user",
     "address" : {
       "city" : "서울특별시",
@@ -1265,7 +1265,7 @@ Content-Length: 489
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/user/edit HTTP/1.1
 Content-Type: application/json
-Content-Length: 145
+Content-Length: 139
 Host: localhost:8080
 
 {
@@ -1332,7 +1332,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 469
+Content-Length: 450
 
 {
   "code" : 200,
@@ -1341,7 +1341,7 @@ Content-Length: 469
   "data" : {
     "id" : 1,
     "email" : "user@gmail.com",
-    "password" : "$2a$10$zYyDzKQaEo8dNMiS2AxJP.kN7xLdZpdx50bKw79a1hASlo/yw5IIS",
+    "password" : "$2a$10$uNMXqN1qVmPE2SQA5RnZnu/kzW6h3R0pnCeFy.5AE436/eBTnm7li",
     "nickName" : "user",
     "address" : {
       "city" : "서울",
@@ -1466,7 +1466,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 97
+Content-Length: 92
 
 {
   "code" : 200,
@@ -1531,7 +1531,7 @@ Content-Length: 97
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/courses HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 27
+Content-Length: 25
 Host: localhost:8080
 
 {
@@ -1570,7 +1570,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 106
+Content-Length: 99
 
 {
   "code" : 200,
@@ -1662,7 +1662,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 106
+Content-Length: 99
 
 {
   "code" : 200,
@@ -1735,7 +1735,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 176
+Content-Length: 165
 
 {
   "code" : 200,
@@ -1831,7 +1831,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 188
+Content-Length: 177
 
 {
   "code" : 200,
@@ -1917,7 +1917,7 @@ Content-Length: 188
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/courses/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 42
+Content-Length: 40
 Host: localhost:8080
 
 {
@@ -1956,7 +1956,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 121
+Content-Length: 114
 
 {
   "code" : 200,
@@ -2048,7 +2048,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 97
+Content-Length: 92
 
 {
   "code" : 200,
@@ -2104,7 +2104,7 @@ Content-Length: 97
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-local HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 40
+Content-Length: 37
 Host: localhost:8080
 
 {
@@ -2150,7 +2150,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 153
+Content-Length: 143
 
 {
   "code" : 200,
@@ -2231,7 +2231,7 @@ Content-Length: 153
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-local/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 21
+Content-Length: 19
 Host: localhost:8080
 
 {
@@ -2270,7 +2270,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 153
+Content-Length: 143
 
 {
   "code" : 200,
@@ -2361,7 +2361,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 237
+Content-Length: 222
 
 {
   "code" : 200,
@@ -2447,7 +2447,7 @@ Content-Length: 237
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/course-local HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 55
+Content-Length: 51
 Host: localhost:8080
 
 {
@@ -2500,7 +2500,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 237
+Content-Length: 222
 
 {
   "code" : 200,
@@ -2595,7 +2595,7 @@ Content-Length: 237
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/course-review HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 71
+Content-Length: 67
 Host: localhost:8080
 
 {
@@ -2648,7 +2648,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 133
+Content-Length: 125
 
 {
   "code" : 200,
@@ -2746,7 +2746,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 259
+Content-Length: 245
 
 {
   "code" : 200,
@@ -2831,7 +2831,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 381
+Content-Length: 361
 
 {
   "code" : 200,
@@ -2931,7 +2931,7 @@ Content-Length: 381
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/course-review/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 71
+Content-Length: 67
 Host: localhost:8080
 
 {
@@ -2948,7 +2948,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 143
+Content-Length: 135
 
 {
   "code" : 200,
@@ -3046,7 +3046,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 104
+Content-Length: 99
 
 {
   "code" : 200,
@@ -3111,7 +3111,7 @@ Content-Length: 104
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/locals HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 221
+Content-Length: 211
 Host: localhost:8080
 
 {
@@ -3200,7 +3200,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 316
+Content-Length: 301
 
 {
   "code" : 200,
@@ -3335,7 +3335,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 316
+Content-Length: 301
 
 {
   "code" : 200,
@@ -3451,7 +3451,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 819
+Content-Length: 784
 
 {
   "code" : 200,
@@ -3606,7 +3606,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 819
+Content-Length: 784
 
 {
   "code" : 200,
@@ -3761,7 +3761,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 97
+Content-Length: 92
 
 {
   "code" : 200,
@@ -3826,7 +3826,7 @@ Content-Length: 97
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/local-review HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 70
+Content-Length: 66
 Host: localhost:8080
 
 {
@@ -3879,7 +3879,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 133
+Content-Length: 125
 
 {
   "code" : 200,
@@ -3977,7 +3977,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 133
+Content-Length: 125
 
 {
   "code" : 200,
@@ -4075,7 +4075,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 259
+Content-Length: 245
 
 {
   "code" : 200,
@@ -4169,7 +4169,7 @@ Content-Length: 259
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/local-review/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 70
+Content-Length: 66
 Host: localhost:8080
 
 {
@@ -4186,7 +4186,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 143
+Content-Length: 135
 
 {
   "code" : 200,
@@ -4284,7 +4284,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 104
+Content-Length: 99
 
 {
   "code" : 200,
@@ -4349,7 +4349,7 @@ Content-Length: 104
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/favorites HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 35
+Content-Length: 33
 Host: localhost:8080
 
 {
@@ -4388,7 +4388,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 114
+Content-Length: 107
 
 {
   "code" : 200,
@@ -4451,7 +4451,7 @@ Content-Length: 114
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/favorites/1/local HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 21
+Content-Length: 19
 Host: localhost:8080
 
 {
@@ -4490,7 +4490,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 138
+Content-Length: 129
 
 {
   "code" : 200,
@@ -4594,7 +4594,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 396
+Content-Length: 378
 
 {
   "code" : 200,
@@ -4618,7 +4618,7 @@ Content-Length: 396
 </div>
 </div>
 <div class="paragraph">
-<p>include::C:\Programming\where-shall-we-go\back-end\build\generated-snippets/favorite-get-single/response-fields.adoc[]ㅤ</p>
+<p>include::/Users/sim-yuri/Desktop/back-end/build/generated-snippets/favorite-get-single/response-fields.adoc[]ㅤ</p>
 </div>
 </div>
 </div>
@@ -4659,7 +4659,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 278
+Content-Length: 267
 
 {
   "code" : 200,
@@ -4750,7 +4750,7 @@ Content-Length: 278
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/favorites/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 38
+Content-Length: 36
 Host: localhost:8080
 
 {
@@ -4765,7 +4765,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 117
+Content-Length: 110
 
 {
   "code" : 200,
@@ -4857,7 +4857,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 97
+Content-Length: 92
 
 {
   "code" : 200,
@@ -4911,7 +4911,7 @@ Content-Length: 97
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-01-05 20:20:30 +0900
+Last updated 2024-01-08 22:13:52 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
