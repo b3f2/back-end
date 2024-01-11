@@ -5,7 +5,7 @@ import com.backend.api.entity.post.*;
 import com.backend.api.entity.user.User;
 import com.backend.api.exception.*;
 import com.backend.api.repository.comment.CommentRepository;
-import com.backend.api.repository.post.CategoryRepository;
+import com.backend.api.repository.category.CategoryRepository;
 import com.backend.api.repository.post.ImageRepository;
 import com.backend.api.repository.post.PostLikeRepository;
 import com.backend.api.repository.post.PostRepository;

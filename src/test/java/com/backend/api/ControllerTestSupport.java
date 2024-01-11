@@ -1,7 +1,7 @@
 package com.backend.api;
 
 import com.backend.api.repository.course.CourseLocalRepository;
-import com.backend.api.repository.post.CategoryRepository;
+import com.backend.api.repository.category.CategoryRepository;
 import com.backend.api.repository.post.PostRepository;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.course.CourseReviewRepository;
