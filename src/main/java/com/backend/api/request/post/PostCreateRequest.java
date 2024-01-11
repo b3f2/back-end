@@ -1,27 +1,15 @@
 package com.backend.api.request.post;
 
-import com.backend.api.entity.post.Image;
-import com.backend.api.entity.post.Post;
-import com.backend.api.exception.CategoryNotFoundException;
-import com.backend.api.exception.UserNotFoundException;
-import com.backend.api.repository.post.CategoryRepository;
-import com.backend.api.repository.user.UserRepository;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 @Data
 @NoArgsConstructor

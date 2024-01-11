@@ -1,10 +1,7 @@
 package com.backend.api.entity.post;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,6 +12,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 
@@ -22,6 +20,7 @@ public class Category {
 //    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
     public Category(String name) {

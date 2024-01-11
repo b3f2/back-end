@@ -1,6 +1,7 @@
 package com.backend.api;
 
 import com.backend.api.jwt.TokenProvider;
+import com.backend.api.repository.category.CategoryRepository;
 import com.backend.api.repository.comment.CommentLikeRepository;
 import com.backend.api.repository.comment.CommentRepository;
 import com.backend.api.repository.course.CourseLocalRepository;
@@ -13,6 +14,7 @@ import com.backend.api.repository.local.LocalRepository;
 import com.backend.api.repository.local.LocalReviewRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.backend.api.service.auth.AuthService;
+import com.backend.api.service.category.CategoryService;
 import com.backend.api.service.course.CourseLocalService;
 import com.backend.api.service.course.CourseReviewService;
 import com.backend.api.service.course.CourseService;
@@ -111,4 +113,9 @@ public abstract class ServiceTestSupport {
 
     @Autowired
     protected CourseLocalRepository courseLocalRepository;
+
+    @Autowired
+    protected CategoryService categoryService;
+
+
 }
