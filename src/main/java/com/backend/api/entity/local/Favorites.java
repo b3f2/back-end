@@ -28,12 +28,17 @@ public class Favorites extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "favorites", fetch = LAZY)
-    private List<FavoriteLocal> favoriteLocals = new ArrayList<>();
+    private List<Local> Local = new ArrayList<>();
 
     @Builder
     public Favorites(String name, User user){
         this.name = name;
         this.user = user;
+    }
+
+    public void addLocals(Local local) {
+        this.Local.add(local);
+        local.setFavorites(this);
     }
 
     public void updateName(String name){

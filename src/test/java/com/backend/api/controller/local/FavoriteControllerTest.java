@@ -3,7 +3,6 @@ package com.backend.api.controller.local;
 import com.backend.api.ControllerTestSupport;
 import com.backend.api.config.WithMockCustomUser;
 import com.backend.api.entity.local.AreaCategory;
-import com.backend.api.entity.local.FavoriteLocal;
 import com.backend.api.entity.local.Favorites;
 import com.backend.api.entity.local.Local;
 import com.backend.api.entity.user.Gender;
@@ -34,9 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FavoriteControllerTest extends ControllerTestSupport {
     @AfterEach
     void setUp() {
-        favoriteLocalRepository.deleteAllInBatch();
-        favoritesRepository.deleteAllInBatch();
         localRepository.deleteAllInBatch();
+        favoritesRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
     }
 
@@ -140,12 +138,11 @@ class FavoriteControllerTest extends ControllerTestSupport {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        List<FavoriteLocal> favoriteLocals = favoritesRepository.findAll().get(0).getFavoriteLocals();
+        Favorites favoriteLocals = favoritesRepository.findAll().get(0);
 
         assertEquals(1L, favoritesRepository.count());
-        assertEquals(1L, favoriteLocalRepository.count());
-        assertEquals("상일동 맛집", favoriteLocalRepository.findAll().get(0).getFavorites().getName());
-        assertEquals("카페 맛집", favoriteLocals.get(0).getLocal().getName());
+        assertEquals("상일동 맛집", favoriteLocals.getName());
+        assertEquals("카페 맛집", favoriteLocals.getLocal().get(0).getName());
     }
 
     @Test
@@ -162,16 +159,13 @@ class FavoriteControllerTest extends ControllerTestSupport {
                 .user(user)
                 .build();
 
-        favoritesRepository.save(favorites);
+        Favorites saved = favoritesRepository.save(favorites);
 
         Local local1 = localCreate(user);
 
         localRepository.save(local1);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local1)
-                .build());
+        saved.addLocals(local1);
 
         Local local2 = Local.builder()
                 .x(String.valueOf(37.8999))
@@ -202,12 +196,11 @@ class FavoriteControllerTest extends ControllerTestSupport {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        List<FavoriteLocal> favoriteLocals = favoritesRepository.findAll().get(0).getFavoriteLocals();
+        Favorites favoriteLocals = favoritesRepository.findAll().get(0);
 
-        assertEquals("상일동 맛집", favoriteLocals.get(0).getFavorites().getName());
-        assertEquals("햄버거 맛집", favoriteLocals.get(1).getLocal().getName());
-        assertEquals(2L, favoriteLocalRepository.count());
-        assertEquals(2L, favoriteLocals.size());
+        assertEquals("상일동 맛집", favoriteLocals.getName());
+        assertEquals("햄버거 맛집", favoriteLocals.getLocal().get(1).getName());
+        assertEquals(2L, favorites.getLocal().size());
         assertEquals(1L, favoritesRepository.count());
     }
 
@@ -340,18 +333,13 @@ class FavoriteControllerTest extends ControllerTestSupport {
                 .user(anotherUser)
                 .build();
 
-        favoritesRepository.save(favorite);
+        Favorites saved = favoritesRepository.save(favorite);
 
         Local local = localCreate(anotherUser);
 
         localRepository.save(local);
 
-        FavoriteLocal favoriteLocal = FavoriteLocal.builder()
-                .favorites(favorite)
-                .local(local)
-                .build();
-
-        favoriteLocalRepository.save(favoriteLocal);
+        saved.addLocals(local);
 
         UpdateFavoriteName updateFavorite = UpdateFavoriteName.builder()
                 .name("폴더명 바꾸기")
@@ -430,10 +418,7 @@ class FavoriteControllerTest extends ControllerTestSupport {
 
         localRepository.save(local1);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local1)
-                .build());
+        favorites.addLocals(local1);
 
         Local local2 = Local.builder()
                 .x(String.valueOf(37.8999))
@@ -450,10 +435,7 @@ class FavoriteControllerTest extends ControllerTestSupport {
 
         localRepository.save(local2);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local2)
-                .build());
+        favorites.addLocals(local2);
 
         DeleteLocalToFavorite deleteLocalToFavorite = DeleteLocalToFavorite.builder()
                 .localId(local1.getId())
@@ -469,12 +451,11 @@ class FavoriteControllerTest extends ControllerTestSupport {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        assertEquals(1L, favoriteLocalRepository.count());
         assertEquals(1L, favoritesRepository.count());
         assertEquals(2L, localRepository.count());
 
-        Local local = favoriteLocalRepository.findAll().get(0).getLocal();
+        List<Local> local = favoritesRepository.findAll().get(0).getLocal();
 
-        assertEquals("햄버거 맛집", local.getName());
+        assertEquals("햄버거 맛집", local.get(0).getName());
     }
 }

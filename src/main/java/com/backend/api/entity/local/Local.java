@@ -29,8 +29,8 @@ public class Local {
 
     private String y;
 
-    @OneToMany(mappedBy = "local", fetch = LAZY)
-    private List<FavoriteLocal> favoriteLocals = new ArrayList<>();
+    @ManyToOne
+    private Favorites favorites;
 
     @OneToMany(mappedBy = "local", fetch = LAZY)
     private List<CourseLocal> courseLocals = new ArrayList<>();
@@ -42,6 +42,10 @@ public class Local {
 
     @ManyToOne(fetch = LAZY)
     private User user;
+
+    public void setFavorites(Favorites favorites) {
+        this.favorites = favorites;
+    }
 
     @Builder
     public Local(String name, String x, String y, Address address, AreaCategory areaCategory,User user) {

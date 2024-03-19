@@ -2,7 +2,6 @@ package com.backend.api.service.local;
 
 import com.backend.api.ServiceTestSupport;
 import com.backend.api.entity.local.AreaCategory;
-import com.backend.api.entity.local.FavoriteLocal;
 import com.backend.api.entity.local.Favorites;
 import com.backend.api.entity.local.Local;
 import com.backend.api.entity.user.Gender;
@@ -12,7 +11,6 @@ import com.backend.api.request.local.AddLocalToFavorite;
 import com.backend.api.request.local.CreateFavorite;
 import com.backend.api.request.local.DeleteLocalToFavorite;
 import com.backend.api.request.local.UpdateFavoriteName;
-import com.backend.api.response.local.FavoriteLocalNameResponse;
 import com.backend.api.response.local.FavoriteResponse;
 import com.backend.api.response.user.LoginResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,9 +29,8 @@ class FavoriteServiceTest extends ServiceTestSupport {
 
     @AfterEach
     void setUp() {
-        favoriteLocalRepository.deleteAllInBatch();
-        favoritesRepository.deleteAllInBatch();
         localRepository.deleteAllInBatch();
+        favoritesRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
     }
 
@@ -107,15 +104,12 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("상일동 맛집")
                 .user(user)
                 .build();
-        favoritesRepository.save(favorites);
+        Favorites saved = favoritesRepository.save(favorites);
 
         Local local1 = localCreate(user);
         localRepository.save(local1);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local1)
-                .build());
+        saved.addLocals(local1);
 
         Local local2 = Local.builder()
                 .x(String.valueOf(37.8999))
@@ -140,12 +134,10 @@ class FavoriteServiceTest extends ServiceTestSupport {
         favoriteService.addLocalToFavorites(loginCreate(user), favorites.getId(), addLocalToFavorite);
 
         //then
-        List<FavoriteLocal> favoriteLocals = favoritesRepository.findAll().get(0).getFavoriteLocals();
+        Favorites favoriteLocals = favoritesRepository.findAll().get(0);
 
-        assertEquals("상일동 맛집", favoriteLocals.get(0).getFavorites().getName());
-        assertEquals("햄버거 맛집", favoriteLocals.get(1).getLocal().getName());
-        assertEquals(2L, favoriteLocalRepository.count());
-        assertEquals(2L, favoriteLocals.size());
+        assertEquals("상일동 맛집", favoriteLocals.getName());
+        assertEquals("햄버거 맛집", favoriteLocals.getLocal().get(1).getName());
         assertEquals(1L, favoritesRepository.count());
     }
 
@@ -161,15 +153,12 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("상일동 맛집")
                 .user(user)
                 .build();
-        favoritesRepository.save(favorites);
+        Favorites saved = favoritesRepository.save(favorites);
 
         Local local1 = localCreate(user);
         localRepository.save(local1);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local1)
-                .build());
+        saved.addLocals(local1);
 
         Local local2 = Local.builder()
                 .x(String.valueOf(37.8999))
@@ -186,10 +175,7 @@ class FavoriteServiceTest extends ServiceTestSupport {
 
         localRepository.save(local2);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local2)
-                .build());
+        saved.addLocals(local2);
 
         //when
         FavoriteResponse favorite = favoriteService.getFavorite(favorites.getId());
@@ -199,8 +185,7 @@ class FavoriteServiceTest extends ServiceTestSupport {
         //then
         assertEquals("상일동 맛집", favorite.getName());
         assertEquals("카페 맛집", favorite.getLocal().get(0).getName());
-        assertEquals(2L, favoriteLocalRepository.count());
-        assertEquals(2L, favoritesRepository.findAll().get(0).getFavoriteLocals().size());
+        assertEquals(2L, favoritesRepository.findAll().get(0).getLocal().size());
         assertEquals(1L, favoritesRepository.count());
     }
 
@@ -216,15 +201,12 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("상일동 맛집")
                 .user(user)
                 .build();
-        favoritesRepository.save(favorites);
+        Favorites saved1 = favoritesRepository.save(favorites);
 
         Local local = localCreate(user);
         localRepository.save(local);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local)
-                .build());
+        saved1.addLocals(local);
 
 
         User anotherUser = User.builder()
@@ -245,26 +227,22 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("길동 맛집")
                 .user(anotherUser)
                 .build();
-        favoritesRepository.save(favorites2);
+        Favorites saved2 = favoritesRepository.save(favorites2);
 
         Local local2 = localCreate(user);
         localRepository.save(local2);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites2)
-                .local(local2)
-                .build());
+        saved2.addLocals(local2);
 
         //when
-        List<FavoriteLocalNameResponse> favorite1 = favoriteService.getFavoritesByUser(user.getId());
-        List<FavoriteLocalNameResponse> favorite2 = favoriteService.getFavoritesByUser(anotherUser.getId());
+        List<FavoriteResponse> favorite1 = favoriteService.getFavoritesByUser(user.getId());
+        List<FavoriteResponse> favorite2 = favoriteService.getFavoritesByUser(anotherUser.getId());
 
         //then
         assertEquals("상일동 맛집", favorite1.get(0).getName());
-        assertEquals("카페 맛집", favorite1.get(0).getLocalNames().get(0));
+        assertEquals("카페 맛집", favorite1.get(0).getLocal().get(0).getName());
         assertEquals("길동 맛집", favorite2.get(0).getName());
-        assertEquals("카페 맛집", favorite2.get(0).getLocalNames().get(0));
-        assertEquals(2L, favoriteLocalRepository.count());
+        assertEquals("카페 맛집", favorite2.get(0).getLocal().get(0).getName());
         assertEquals(2L, favoritesRepository.count());
         assertEquals(2L, localRepository.count());
     }
@@ -325,7 +303,7 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("상일동 맛집")
                 .user(user)
                 .build();
-        favoritesRepository.save(favorites);
+        Favorites saved = favoritesRepository.save(favorites);
 
         Local local = localCreate(user);
         localRepository.save(local);
@@ -344,15 +322,9 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .build();
         localRepository.save(local2);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local)
-                .build());
+        saved.addLocals(local);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local2)
-                .build());
+        saved.addLocals(local2);
 
         DeleteLocalToFavorite deleteLocalToFavorite = DeleteLocalToFavorite.builder()
                 .localId(local.getId())
@@ -362,11 +334,10 @@ class FavoriteServiceTest extends ServiceTestSupport {
         favoriteService.deleteLocalToFavorites(loginCreate(user), favorites.getId(), deleteLocalToFavorite);
 
         //then
-        assertEquals(1L, favoriteLocalRepository.count());
         assertEquals(2L, localRepository.count());
         assertEquals(1L, favoritesRepository.count());
-        assertEquals("햄버거 맛집", favoriteLocalRepository.findAll().get(0).getLocal().getName());
-        assertEquals(2L, favoritesRepository.findAll().get(0).getFavoriteLocals().size());
+        assertEquals(1L, saved.getLocal().size());
+        assertEquals("햄버거 맛집", saved.getLocal().get(0).getName());
     }
 
     @Test
@@ -381,7 +352,7 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .name("상일동 맛집")
                 .user(user)
                 .build();
-        favoritesRepository.save(favorites);
+        Favorites saved = favoritesRepository.save(favorites);
 
         Local local = localCreate(user);
         localRepository.save(local);
@@ -400,21 +371,14 @@ class FavoriteServiceTest extends ServiceTestSupport {
                 .build();
         localRepository.save(local2);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local)
-                .build());
+        saved.addLocals(local);
 
-        favoriteLocalRepository.save(FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local2)
-                .build());
+        saved.addLocals(local2);
 
         //when
         favoriteService.deleteFavorite(loginCreate(user), favorites.getId());
 
         //then
-        assertEquals(0, favoriteLocalRepository.count());
         assertEquals(2L, localRepository.count());
         assertEquals(0, favoritesRepository.count());
     }

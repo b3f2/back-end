@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class FavoriteNameResponse {
-    private String name;
+    private final String name;
 
     @Builder
     public FavoriteNameResponse(String name) {
