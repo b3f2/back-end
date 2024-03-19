@@ -11,7 +11,9 @@ import com.backend.api.request.local.AddLocalToFavorite;
 import com.backend.api.request.local.CreateFavorite;
 import com.backend.api.request.local.DeleteLocalToFavorite;
 import com.backend.api.request.local.UpdateFavoriteName;
-import com.backend.api.response.local.*;
+import com.backend.api.response.local.FavoriteNameResponse;
+import com.backend.api.response.local.FavoriteResponse;
+import com.backend.api.response.local.LocalResponse;
 import com.backend.api.response.user.LoginResponse;
 import com.backend.api.service.local.FavoriteService;
 import org.junit.jupiter.api.DisplayName;
@@ -91,10 +93,9 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                 .localId(1L)
                 .build();
 
-        FavoriteLocalResponse response = FavoriteLocalResponse.builder()
-                .favoriteId(1L)
-                .localId(1L)
-                .id(1L)
+        FavoriteResponse response = FavoriteResponse.builder()
+                .name("강동구 맛집")
+                .local(List.of(LocalResponse.of(localCreate(userCreate()))))
                 .build();
 
         given(favoriteService.addLocalToFavorites(any(LoginResponse.class), any(Long.class), any(AddLocalToFavorite.class)))
@@ -125,12 +126,26 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                                         .description("메세지"),
                                 fieldWithPath("data").type(JsonFieldType.OBJECT)
                                         .description("응답 데이터"),
-                                fieldWithPath("data.id").type(JsonFieldType.NUMBER)
-                                        .description("FavoriteLocal ID"),
-                                fieldWithPath("data.favoriteId").type(JsonFieldType.NUMBER)
-                                        .description("폴더 ID"),
-                                fieldWithPath("data.localId").type(JsonFieldType.NUMBER)
-                                        .description("장소 ID"))
+                                fieldWithPath("data.name").type(JsonFieldType.STRING)
+                                        .description("폴더 이름"),
+                                fieldWithPath("data.local").type(JsonFieldType.ARRAY)
+                                        .description("장소"),
+                                fieldWithPath("data.local[].name").type(JsonFieldType.STRING)
+                                        .description("장소 이름"),
+                                fieldWithPath("data.local[].address").type(JsonFieldType.OBJECT)
+                                        .description("장소 주소"),
+                                fieldWithPath("data.local[].address.city").type(JsonFieldType.STRING)
+                                        .description("장소 주소 도시"),
+                                fieldWithPath("data.local[].address.street").type(JsonFieldType.STRING)
+                                        .description("장소 주소 도로명"),
+                                fieldWithPath("data.local[].address.zipcode").type(JsonFieldType.STRING)
+                                        .description("장소 주소 우편번호"),
+                                fieldWithPath("data.local[].areaCategory").type(JsonFieldType.STRING)
+                                        .description("장소 카테고리"),
+                                fieldWithPath("data.local[].x").type(JsonFieldType.STRING)
+                                        .description("장소 x좌표"),
+                                fieldWithPath("data.local[].y").type(JsonFieldType.STRING)
+                                        .description("장소 y좌표"))
                 ));
     }
 
@@ -296,18 +311,16 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
     @DisplayName("폴더 사용자 id값으로 조회")
     void getFavoriteByUserId() throws Exception {
         //given
-        FavoriteLocalNameResponse response = FavoriteLocalNameResponse.builder()
+        List<FavoriteResponse> response = List.of(FavoriteResponse.builder()
                 .name("상일동 맛집")
-                .localNames(List.of("카페 맛집", "햄버거 맛집"))
-                .build();
-
-        FavoriteLocalNameResponse response2 = FavoriteLocalNameResponse.builder()
-                .name("길동 맛집")
-                .localNames(List.of("우동 맛집", "돈까스 맛집"))
-                .build();
+                .local(List.of(
+                        LocalResponse.of(localCreate(userCreate())),
+                        LocalResponse.of(localCreate2(userCreate()))
+                        ))
+                .build());
 
         given(favoriteService.getFavoritesByUser(any(Long.class)))
-                .willReturn(List.of(response, response2));
+                .willReturn(response);
 
 
         //expected
@@ -332,8 +345,22 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                                         .description("응답 데이터"),
                                 fieldWithPath("data[].name").type(JsonFieldType.STRING)
                                         .description("장소 저장 이름"),
-                                fieldWithPath("data[].localNames").type(JsonFieldType.ARRAY)
-                                        .description("폴더 안 장소들 이름"))
+                                fieldWithPath("data[].local[].name").type(JsonFieldType.STRING)
+                                        .description("장소 이름"),
+                                fieldWithPath("data[].local[].address").type(JsonFieldType.OBJECT)
+                                        .description("장소 주소"),
+                                fieldWithPath("data[].local[].address.city").type(JsonFieldType.STRING)
+                                        .description("장소 주소 도시"),
+                                fieldWithPath("data[].local[].address.street").type(JsonFieldType.STRING)
+                                        .description("장소 주소 도로명"),
+                                fieldWithPath("data[].local[].address.zipcode").type(JsonFieldType.STRING)
+                                        .description("장소 주소 우편번호"),
+                                fieldWithPath("data[].local[].areaCategory").type(JsonFieldType.STRING)
+                                        .description("장소 카테고리"),
+                                fieldWithPath("data[].local[].x").type(JsonFieldType.STRING)
+                                        .description("장소 x좌표"),
+                                fieldWithPath("data[].local[].y").type(JsonFieldType.STRING)
+                                        .description("장소 y좌표"))
                 ));
     }
 
@@ -363,6 +390,20 @@ public class FavoriteControllerDocTest extends RestDocsSupport {
                         .build())
                 .areaCategory(AreaCategory.CAFE)
                 .name("카페 맛집")
+                .user(user)
+                .build();
+    }
+    private Local localCreate2(User user){
+        return Local.builder()
+                .x(String.valueOf(37.5665))
+                .y(String.valueOf(126.9780))
+                .address(Address.builder()
+                        .city("서울시")
+                        .street("천호대로 99길 12")
+                        .zipcode("101동 102호")
+                        .build())
+                .areaCategory(AreaCategory.RESTAURANT)
+                .name("돈까스 맛집")
                 .user(user)
                 .build();
     }

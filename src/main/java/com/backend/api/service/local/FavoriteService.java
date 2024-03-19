@@ -1,11 +1,12 @@
 package com.backend.api.service.local;
 
-import com.backend.api.entity.local.FavoriteLocal;
 import com.backend.api.entity.local.Favorites;
 import com.backend.api.entity.local.Local;
 import com.backend.api.entity.user.User;
-import com.backend.api.exception.*;
-import com.backend.api.repository.local.FavoriteLocalRepository;
+import com.backend.api.exception.FavoriteNotFoundException;
+import com.backend.api.exception.InvalidUserException;
+import com.backend.api.exception.LocalNotFoundException;
+import com.backend.api.exception.UserNotFoundException;
 import com.backend.api.repository.local.FavoritesRepository;
 import com.backend.api.repository.local.LocalRepository;
 import com.backend.api.repository.user.UserRepository;
@@ -13,7 +14,9 @@ import com.backend.api.request.local.AddLocalToFavorite;
 import com.backend.api.request.local.CreateFavorite;
 import com.backend.api.request.local.DeleteLocalToFavorite;
 import com.backend.api.request.local.UpdateFavoriteName;
-import com.backend.api.response.local.*;
+import com.backend.api.response.local.FavoriteNameResponse;
+import com.backend.api.response.local.FavoriteResponse;
+import com.backend.api.response.local.LocalResponse;
 import com.backend.api.response.user.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +32,6 @@ public class FavoriteService {
     private final UserRepository userRepository;
     private final FavoritesRepository favoritesRepository;
     private final LocalRepository localRepository;
-    private final FavoriteLocalRepository favoriteLocalRepository;
 
     @Transactional
     public FavoriteNameResponse createFavorite(LoginResponse loginResponse, CreateFavorite request) {
@@ -58,7 +60,7 @@ public class FavoriteService {
     }
 
     @Transactional
-    public FavoriteLocalResponse addLocalToFavorites(LoginResponse loginResponse, Long id, AddLocalToFavorite addLocalToFavorite) {
+    public FavoriteResponse addLocalToFavorites(LoginResponse loginResponse, Long id, AddLocalToFavorite addLocalToFavorite) {
         Favorites favorites = favoritesRepository.findById(id)
                 .orElseThrow(FavoriteNotFoundException::new);
 
@@ -69,26 +71,22 @@ public class FavoriteService {
         Local local = localRepository.findById(addLocalToFavorite.getLocalId())
                 .orElseThrow(LocalNotFoundException::new);
 
-        FavoriteLocal favoriteLocal = FavoriteLocal.builder()
-                .favorites(favorites)
-                .local(local)
-                .build();
+        favorites.addLocals(local);
+        localRepository.save(local);
 
-        favoriteLocalRepository.save(favoriteLocal);
-
-        return FavoriteLocalResponse.of(favoriteLocal);
+        return FavoriteResponse.of(favorites);
     }
 
     @Transactional
     public void deleteLocalToFavorites(LoginResponse loginResponse, Long favoritesId, DeleteLocalToFavorite request) {
-        FavoriteLocal favoriteLocal = favoriteLocalRepository.findByFavoritesIdAndLocalId(favoritesId, request.getLocalId())
-                .orElseThrow(FavoriteLocalNotFoundException::new);
+        Favorites favorites = favoritesRepository.findById(favoritesId)
+                .orElseThrow(FavoriteNotFoundException::new);
 
-        if (!favoriteLocal.getFavorites().getUser().getEmail().equals(loginResponse.getEmail())) {
+        if (!favorites.getUser().getEmail().equals(loginResponse.getEmail())) {
             throw new InvalidUserException();
         }
 
-        favoriteLocalRepository.delete(favoriteLocal);
+        favorites.getLocal().removeIf(local -> local.getId().equals(request.getLocalId()));
     }
 
     @Transactional
@@ -100,9 +98,12 @@ public class FavoriteService {
             throw new InvalidUserException();
         }
 
-        List<FavoriteLocal> byFavoritesId = favoriteLocalRepository.findByFavoritesId(id);
-        favoriteLocalRepository.deleteAll(byFavoritesId);
+        List<Local> locals = localRepository.findAllByFavorites(favorites);
 
+        for (Local local : locals) {
+            local.setFavorites(null);
+            localRepository.save(local);
+        }
         favoritesRepository.deleteById(id);
     }
 
@@ -110,8 +111,7 @@ public class FavoriteService {
         Favorites favorites = favoritesRepository.findById(id)
                 .orElseThrow(FavoriteNotFoundException::new);
 
-        List<LocalResponse> list = favorites.getFavoriteLocals().stream()
-                .map(FavoriteLocal::getLocal)
+        List<LocalResponse> list = favorites.getLocal().stream()
                 .map(LocalResponse::of)
                 .toList();
 
@@ -121,14 +121,10 @@ public class FavoriteService {
                 .build();
     }
 
-    public List<FavoriteLocalNameResponse> getFavoritesByUser(Long userId) {
-        return favoritesRepository.findByUserId(userId).stream()
-                .map(favorites -> new FavoriteLocalNameResponse(
-                        favorites.getName(),
-                        favorites.getFavoriteLocals().stream()
-                                .map(FavoriteLocal::getLocal)
-                                .map(Local::getName)
-                                .toList()))
+    public List<FavoriteResponse> getFavoritesByUser(Long userId) {
+        List<Favorites> byUserId = favoritesRepository.findByUserId(userId);
+        return byUserId.stream()
+                .map(FavoriteResponse::of)
                 .toList();
     }
 

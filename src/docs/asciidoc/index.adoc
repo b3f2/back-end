@@ -372,7 +372,7 @@ include::{snippets}/favorite-get-single/http-request.adoc[]
 
 ==== Http Response
 include::{snippets}/favorite-get-single/http-response.adoc[]
-include::{snippets}/favorite-get-single/response-fields.adoc[]ㅤ
+include::{snippets}/favorite-get-single/response-fields.adoc[]
 
 === 사용자의 즐겨찾기(폴더) 조회
 

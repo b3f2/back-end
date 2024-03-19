@@ -1,14 +1,13 @@
 package com.backend.api;
 
-import com.backend.api.repository.course.CourseLocalRepository;
 import com.backend.api.repository.category.CategoryRepository;
-import com.backend.api.repository.post.PostRepository;
+import com.backend.api.repository.course.CourseLocalRepository;
 import com.backend.api.repository.course.CourseRepository;
 import com.backend.api.repository.course.CourseReviewRepository;
-import com.backend.api.repository.local.FavoriteLocalRepository;
 import com.backend.api.repository.local.FavoritesRepository;
 import com.backend.api.repository.local.LocalRepository;
 import com.backend.api.repository.local.LocalReviewRepository;
+import com.backend.api.repository.post.PostRepository;
 import com.backend.api.repository.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +46,6 @@ public abstract class ControllerTestSupport {
 
     @Autowired
     protected FavoritesRepository favoritesRepository;
-
-    @Autowired
-    protected FavoriteLocalRepository favoriteLocalRepository;
 
     @Autowired
     protected PostRepository postRepository;

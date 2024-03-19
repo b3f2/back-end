@@ -5,8 +5,6 @@ import com.backend.api.request.local.AddLocalToFavorite;
 import com.backend.api.request.local.CreateFavorite;
 import com.backend.api.request.local.DeleteLocalToFavorite;
 import com.backend.api.request.local.UpdateFavoriteName;
-import com.backend.api.response.local.FavoriteLocalNameResponse;
-import com.backend.api.response.local.FavoriteLocalResponse;
 import com.backend.api.response.local.FavoriteNameResponse;
 import com.backend.api.response.local.FavoriteResponse;
 import com.backend.api.response.user.LoginResponse;
@@ -32,7 +30,7 @@ public class FavoriteController {
     }
 
     @PostMapping("/favorites/{favoriteId}/local")
-    public ApiResponse<FavoriteLocalResponse> addLocalToFavorite(@Login LoginResponse loginResponse, @PathVariable Long favoriteId, @RequestBody @Valid AddLocalToFavorite request) {
+    public ApiResponse<FavoriteResponse> addLocalToFavorite(@Login LoginResponse loginResponse, @PathVariable Long favoriteId, @RequestBody @Valid AddLocalToFavorite request) {
         return ApiResponse.ok(favoriteService.addLocalToFavorites(loginResponse, favoriteId, request));
     }
 
@@ -65,7 +63,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/user/{userId}/favorites")
-    public ApiResponse<List<FavoriteLocalNameResponse>> getFavoriteByUserId(@PathVariable Long userId) {
+    public ApiResponse<List<FavoriteResponse>> getFavoriteByUserId(@PathVariable Long userId) {
         return ApiResponse.ok(favoriteService.getFavoritesByUser(userId));
     }
 }

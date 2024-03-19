@@ -9,9 +9,9 @@ import java.util.List;
 @Getter
 public class FavoriteResponse {
 
-    private String name;
+    private final String name;
 
-    private List<LocalResponse> local;
+    private final List<LocalResponse> local;
 
     @Builder
     public FavoriteResponse(String name, List<LocalResponse> local) {
@@ -25,10 +25,10 @@ public class FavoriteResponse {
     }
 
 
-    public static FavoriteResponse of(Favorites favorites, List<LocalResponse> local) {
+    public static FavoriteResponse of(Favorites favorites) {
         return FavoriteResponse.builder()
                 .name(favorites.getName())
-                .local(local)
+                .local(favorites.getLocal().stream().map(LocalResponse::of).toList())
                 .build();
     }
 }
